@@ -11,7 +11,7 @@
 
   outputs = { nixpkgs, home-manager, ... }:
     let
-      username = "mads";
+      username = "madeleine.ostoja";
       system = "aarch64-darwin";
       pkgs = import nixpkgs {
         inherit system;

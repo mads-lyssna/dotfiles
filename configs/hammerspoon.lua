@@ -2,11 +2,14 @@ local hyper = { "cmd", "ctrl", "alt", "shift" }
 
 local apps = {
   t = "Ghostty",
-  c = "Visual Studio Code",
+  x = "Visual Studio Code",
   b = "Helium",
-  w = "Safari",
-  m = "Mail",
-  n = "Notion"
+  w = "Helium",
+  c = "Calendar"
+  e = "Mail",
+  n = "Notion",
+  s = "Slack",
+  m = "Music"
 }
 
 for key, app in pairs(apps) do

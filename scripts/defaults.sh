@@ -47,9 +47,6 @@ defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
-# Safari
-defaults write -app "Safari" AutoOpenSafeDownloads -bool false
-
 # Misc 
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 defaults write NSGlobalDomain _HIHideMenuBar -bool true

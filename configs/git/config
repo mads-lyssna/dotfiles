@@ -1,6 +1,7 @@
 [user]
   name = Madi Ostoja
-  email = madi@madeleineostoja.com
+  email = madeleine.ostoja@lyssna.com
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICxRtTMuADzhMH+bTLq0a/Qxyk6Ak3/aT5IsthUhwisc
 
 [init]
   defaultBranch = main
@@ -39,3 +40,12 @@
 
 [url "git@github.com:"]
   insteadOf = https://github.com/
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[commit]
+  gpgsign = true

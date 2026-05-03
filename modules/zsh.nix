@@ -62,6 +62,8 @@
       setopt AUTO_CD INTERACTIVE_COMMENTS EXTENDED_GLOB NO_BEEP
       zstyle ':completion:*' menu select
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+      export SSH_AUTH_SOCK=~/.1password/agent.sock
     '';
   };
 
@@ -89,4 +91,5 @@
       };
     };
   };
+
 }
