@@ -18,7 +18,6 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightC
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
 # Finder 
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
@@ -49,7 +48,6 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
 # Misc 
 defaults write com.apple.LaunchServices LSQuarantine -bool false
-defaults write NSGlobalDomain _HIHideMenuBar -bool true
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
