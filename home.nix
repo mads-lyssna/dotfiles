@@ -55,7 +55,13 @@ in
     VISUAL = "code --wait";
     LANG = "en_NZ.UTF-8";
     LC_ALL = "en_NZ.UTF-8";
+    PNPM_HOME = "${config.home.homeDirectory}/Library/pnpm";
   };
+
+  # Fix PNPM global installs
+  home.sessionPath = [
+    "${config.home.homeDirectory}/Library/pnpm"
+  ];
 
   # Config files
   home.file = {
