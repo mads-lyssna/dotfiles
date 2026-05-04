@@ -86,9 +86,9 @@
     globalConfig = {
       tools = {
         node = "lts";
-        ruby = "3.3";
-        python = "3.12";
+        ruby = "4.0";
       };
+      settings.ruby.compile = false;
     };
   };
 
