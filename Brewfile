@@ -7,6 +7,7 @@ cask "helium-browser"
 cask "notion"
 cask "claude"
 cask "linear"
+cask "figma"
 
 # Development
 cask "ghostty"
