@@ -1,17 +1,23 @@
 {
   config,
   pkgs,
-  username,
+  lib,
+  homeDirectory,
   ...
 }:
 
 let
-  dotfiles = "${config.home.homeDirectory}/dotfiles";
+  dotfiles = "${homeDirectory}/dotfiles";
   mkLink = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
+  isDarwin = pkgs.stdenv.isDarwin;
+  pnpmHome =
+    if isDarwin
+    then "${homeDirectory}/Library/pnpm"
+    else "${homeDirectory}/.local/share/pnpm";
 in
 {
-  home.username = username;
-  home.homeDirectory = "/Users/${username}";
+  home.username = baseNameOf homeDirectory;
+  home.homeDirectory = homeDirectory;
   home.stateVersion = "25.11";
 
   programs.home-manager.enable = true;
@@ -55,21 +61,16 @@ in
     VISUAL = "code --wait";
     LANG = "en_NZ.UTF-8";
     LC_ALL = "en_NZ.UTF-8";
-    PNPM_HOME = "${config.home.homeDirectory}/Library/pnpm";
+    PNPM_HOME = pnpmHome;
   };
 
   # Fix PNPM global installs
-  home.sessionPath = [
-    "${config.home.homeDirectory}/Library/pnpm"
-  ];
+  home.sessionPath = [ pnpmHome ];
 
   # Config files
   home.file = {
-    ".ssh/config".source = mkLink "ssh/config";
     ".config/git/config".source = mkLink "configs/git/config";
     ".config/git/ignore".source = mkLink "configs/git/ignore";
-    ".config/ghostty/config".source = mkLink "configs/ghostty";
-    ".hammerspoon/init.lua".source = mkLink "configs/hammerspoon.lua";
 
     # Claude
     ".claude/CLAUDE.md".source = mkLink "configs/claude/CLAUDE.md";
@@ -79,5 +80,9 @@ in
       source = mkLink "configs/claude/skills";
       recursive = true;
     };
+  } // lib.optionalAttrs isDarwin {
+    ".ssh/config".source = mkLink "configs/ssh";
+    ".config/ghostty/config".source = mkLink "configs/ghostty";
+    ".hammerspoon/init.lua".source = mkLink "configs/hammerspoon.lua";
   };
 }
