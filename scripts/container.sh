@@ -30,9 +30,11 @@ if [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
 fi
 
 # 2. Run home-manager
+# NIX_CONFIG (vs --extra-experimental-features) propagates to nix subprocesses
+# that home-manager spawns internally for the flake evaluation.
 echo "→ Running home-manager switch for vscode"
-nix run --extra-experimental-features 'nix-command flakes' home-manager/master -- \
-  switch --flake "${DOTFILES}#vscode"
+NIX_CONFIG="experimental-features = nix-command flakes" \
+  nix run home-manager/master -- switch --flake "${DOTFILES}#vscode"
 
 # 3. Install Marvin (needs pnpm on PATH from home-manager)
 export PATH="$HOME/.nix-profile/bin:$PATH"
