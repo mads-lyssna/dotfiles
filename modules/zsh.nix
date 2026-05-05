@@ -89,7 +89,10 @@
         node = "lts";
         ruby = "4.0";
       };
-      settings.ruby.compile = false;
+      settings = {
+        ruby.compile = false;
+        idiomatic_version_file_enable_tools = [ "ruby" ];
+      };
     };
   };
 
