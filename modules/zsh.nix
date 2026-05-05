@@ -28,6 +28,7 @@
       rmf = "rm -rf";
       pn = "pnpm";
       sb = "supabase";
+      cc = "claude";
 
       # Git
       g = "git";
