@@ -9,6 +9,7 @@ local apps = {
   e = "Mail",
   n = "Notion",
   s = "Slack",
+  l = "Linear",
   m = "Music"
 }
 
