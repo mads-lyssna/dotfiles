@@ -31,9 +31,8 @@ fi
 
 # 2. Run home-manager
 echo "→ Running home-manager switch for vscode"
-nix run home-manager/master -- \
-  switch --flake "${DOTFILES}#vscode" \
-  --extra-experimental-features 'nix-command flakes'
+nix run --extra-experimental-features 'nix-command flakes' home-manager/master -- \
+  switch --flake "${DOTFILES}#vscode"
 
 # 3. Install Marvin (needs pnpm on PATH from home-manager)
 export PATH="$HOME/.nix-profile/bin:$PATH"
