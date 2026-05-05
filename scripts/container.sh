@@ -36,12 +36,4 @@ echo "→ Running home-manager switch for vscode"
 NIX_CONFIG="experimental-features = nix-command flakes" \
   nix run home-manager/master -- switch -b backup --flake "${DOTFILES}#vscode"
 
-# 3. Install Marvin (needs pnpm on PATH from home-manager)
-export PATH="$HOME/.nix-profile/bin:$PATH"
-if command -v pnpm >/dev/null 2>&1; then
-  run "marvin installed" pnpm add -g github:madeleineostoja/marvin
-else
-  echo "✗ pnpm not on PATH after home-manager; skipping marvin"
-fi
-
 echo "✓ install complete"
