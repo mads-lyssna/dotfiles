@@ -9,6 +9,7 @@
       "Bash(ls:*)"
     ]
   },
+  "model": "opus[1m]",
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline-command.sh"
@@ -19,5 +20,4 @@
       "commitCoAuthor": false
     }
   },
-  "model": "opus[1m]"
 }

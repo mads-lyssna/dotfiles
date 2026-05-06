@@ -15,6 +15,11 @@ local apps = {
 
 for key, app in pairs(apps) do
   hs.hotkey.bind(hyper, key, function()
-    hs.application.launchOrFocus(app)
+    local running = hs.application.find(app)
+    if running then
+      hs.application.launchOrFocusByBundleID(running:bundleID())
+    else
+      hs.application.launchOrFocus(app)
+    end
   end)
 end
