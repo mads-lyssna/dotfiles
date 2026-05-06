@@ -65,6 +65,8 @@
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
       export SSH_AUTH_SOCK=~/.1password/agent.sock
+
+      if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
     '';
   };
 
