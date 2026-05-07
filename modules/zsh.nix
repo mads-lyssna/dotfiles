@@ -58,6 +58,7 @@
       nixsync = "home-manager switch --flake ~/dotfiles";
       brewsync = "brew bundle install --cleanup --force --zap --file=~/dotfiles/Brewfile";
       sysupdate = "~/dotfiles/scripts/update.sh";
+      devshell = ''devcontainer up --workspace-folder "$PWD" >/dev/null && devcontainer exec --workspace-folder "$PWD" zsh'';
     };
 
     initContent = ''
