@@ -11,9 +11,7 @@ let
   mkLink = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
   isDarwin = pkgs.stdenv.isDarwin;
   pnpmHome =
-    if isDarwin
-    then "${homeDirectory}/Library/pnpm"
-    else "${homeDirectory}/.local/share/pnpm";
+    if isDarwin then "${homeDirectory}/Library/pnpm" else "${homeDirectory}/.local/share/pnpm";
 in
 {
   home.username = baseNameOf homeDirectory;
@@ -50,6 +48,7 @@ in
     mise
     pnpm
     nixfmt
+    devcontainer
 
     # Other
     claude-code
@@ -80,7 +79,8 @@ in
       source = mkLink "configs/claude/skills";
       recursive = true;
     };
-  } // lib.optionalAttrs isDarwin {
+  }
+  // lib.optionalAttrs isDarwin {
     ".ssh/config".source = mkLink "configs/ssh";
     ".config/ghostty/config".source = mkLink "configs/ghostty";
     ".hammerspoon/init.lua".source = mkLink "configs/hammerspoon.lua";
