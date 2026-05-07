@@ -48,6 +48,7 @@
       gpull = "git pull";
       grpull = "git fetch && git rebase";
       gpush = "git push";
+      gpushf = "git push --force-with-lease --force-if-includes";
       greset = "git reset HEAD~1";
       grecommit = "git commit --amend -C HEAD";
       gr = "git rebase";
