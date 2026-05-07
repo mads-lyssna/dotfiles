@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Base devcontainer installer. Installs Nix (single-user), runs home-manager,
-# installs Marvin. Run as the vscode user inside the container.
 set -euo pipefail
 
 DOTFILES="${DOTFILES:-$HOME/dotfiles}"
