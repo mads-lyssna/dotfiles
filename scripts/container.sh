@@ -4,18 +4,6 @@ set -euo pipefail
 
 DOTFILES="${DOTFILES:-$HOME/dotfiles}"
 
-run() {
-  local desc="$1"; shift
-  local output
-  if output=$("$@" 2>&1); then
-    echo "✓ $desc"
-  else
-    echo "✗ $desc"
-    echo "$output"
-    return 1
-  fi
-}
-
 # 1. Install Nix if missing
 if ! command -v nix >/dev/null 2>&1; then
   echo "→ Installing Nix (single-user)"
