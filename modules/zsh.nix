@@ -28,6 +28,7 @@
       rmf = "rm -rf";
       pn = "pnpm";
       sb = "supabase";
+      cc = "claude";
 
       # Git
       g = "git";
@@ -57,12 +58,15 @@
       nixsync = "home-manager switch --flake ~/dotfiles";
       brewsync = "brew bundle install --cleanup --force --zap --file=~/dotfiles/Brewfile";
       sysupdate = "~/dotfiles/scripts/update.sh";
+      devshell = ''devcontainer up --workspace-folder "$PWD" >/dev/null && devcontainer exec --workspace-folder "$PWD" zsh && cd ~/dotfiles && git fetch origin work && git checkout -B work FETCH_HEAD && scripts/container.sh && cd ~/app'';
     };
 
     initContent = ''
       setopt AUTO_CD INTERACTIVE_COMMENTS EXTENDED_GLOB NO_BEEP
       zstyle ':completion:*' menu select
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+      export SSH_AUTH_SOCK=~/.1password/agent.sock
 
       if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
     '';
@@ -87,9 +91,13 @@
     globalConfig = {
       tools = {
         node = "lts";
-        ruby = "3.3";
-        python = "3.12";
+        ruby = "4.0";
+      };
+      settings = {
+        ruby.compile = false;
+        idiomatic_version_file_enable_tools = [ "ruby" ];
       };
     };
   };
+
 }

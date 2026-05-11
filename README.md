@@ -118,23 +118,10 @@ If broken: `nixsync --rollback`.
 - **Pearcleaner** — orphan-files scan after removing apps
 - **DaisyDisk** — investigating disk-full situations
 
-## Forking for work
+## Branches
 
-```bash
-git clone git@github.com:USERNAME/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-git remote add upstream git@github.com:USERNAME/dotfiles.git
-
-# Work-specific changes:
-# - flake.nix: username
-# - launchd/com.user.nix-gc.plist: username
-# - configs/git/config: work email, signing key
-# - Brewfile: 1password, slack, zoom, etc.
-# - configs/ssh: 1Password agent socket
-
-# Pull personal improvements periodically:
-git fetch upstream && git merge upstream/main && git push
-```
+- **`main`**: Personal configs
+- **`work`**: Work fork
 
 ## Common operations
 

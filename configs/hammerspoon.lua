@@ -2,11 +2,15 @@ local hyper = { "cmd", "ctrl", "alt", "shift" }
 
 local apps = {
   t = "com.mitchellh.ghostty",
-  c = "com.microsoft.VSCode",
+  x = "com.microsoft.VSCode",
   b = "net.imput.helium",
-  w = "com.apple.Safari",
-  m = "com.apple.mail",
-  n = "notion.id"
+  w = "net.imput.helium",
+  c = "com.apple.iCal",
+  e = "com.apple.mail",
+  n = "notion.id",
+  s = "com.tinyspeck.slackmacgap",
+  l = "com.linear",
+  m = "com.apple.Music"
 }
 
 for key, bundleID in pairs(apps) do

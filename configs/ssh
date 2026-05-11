@@ -1,9 +1,2 @@
 Host *
-  AddKeysToAgent yes
-  UseKeychain yes
-  IdentityFile ~/.ssh/id_ed25519
-  ServerAliveInterval 60
-
-Host github.com
-  User git
-  IdentityFile ~/.ssh/id_ed25519
+  IdentityAgent "~/.1password"
