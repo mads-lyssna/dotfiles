@@ -1,4 +1,17 @@
 {
+  "model": "opus[1m]",
+  "effort": "medium",
+  "respectGitignore": false,
+  "spinnerTipsEnabled": false,
+  "theme": "dark",
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
   "permissions": {
     "allow": [
       "Bash(git diff:*)",
@@ -7,17 +20,10 @@
       "Bash(rg:*)",
       "Bash(fd:*)",
       "Bash(ls:*)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)"
     ]
-  },
-  "model": "opus[1m]",
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/statusline-command.sh"
-  },
-  "theme": "dark",
-  "preferences": {
-    "codeStyle": {
-      "commitCoAuthor": false
-    }
   }
 }
