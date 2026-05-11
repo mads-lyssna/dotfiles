@@ -58,8 +58,6 @@ in
   home.sessionVariables = {
     EDITOR = "code --wait";
     VISUAL = "code --wait";
-    LANG = "en_NZ.UTF-8";
-    LC_ALL = "en_NZ.UTF-8";
     PNPM_HOME = pnpmHome;
   };
 
