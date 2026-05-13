@@ -37,6 +37,7 @@ in
     fd
     fzf
     dust
+    hyperfine
 
     # Git
     git
