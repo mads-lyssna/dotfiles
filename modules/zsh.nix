@@ -51,7 +51,9 @@
       gpushf = "git push --force-with-lease --force-if-includes";
       greset = "git reset HEAD~1";
       grecommit = "git commit --amend -C HEAD";
+      gcp = "git cherry-pick";
       gr = "git rebase";
+      gf = "git fetch";
       lg = "lazygit";
 
       # Shortcuts
