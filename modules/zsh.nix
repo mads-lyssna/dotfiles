@@ -80,7 +80,7 @@
     enableZshIntegration = true;
     settings = {
       git_status.disabled = true;
-      nodejs.symbol = " ";
+      nodejs.symbol = "󰎙 ";
     };
   };
 
