@@ -7,13 +7,11 @@
 
 ## Context efficient commands
 
-Wrap bash commands with output suppression to preserve context window:
+When you only need to know whether a bash command succeeds (eg: tests, linting, scripts with side effects, etc), wrap it with an output suppression pattern to preserve context window and only show full output on failure:
 
 ```bash
 output=$(<command> 2>&1) && echo "✓ <description>" || { echo "✗ <description>"; echo "$output"; false; }
 ```
-
-Only show full output on failure.
 
 ## Tool Preferences
 
