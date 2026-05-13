@@ -20,3 +20,7 @@ The following non-standard CLI tools are available for you to use:
 - Use `rg` instead of `grep` (example: `rg "pattern"` instead of `grep -r "pattern"`)
 - Use `fd` instead of `find` (example: `fd "filename"` instead of `find . -name "filename"`)
 - Use `gh` for interacting with Github
+
+## Commit preferences
+
+Follow a lightweight Conventional Commit pattern for commit messages: `<type>: <brief description>`.  Add a body (after a blank line) ONLY if there is non-obvious context worth recording.
