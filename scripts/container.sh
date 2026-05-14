@@ -20,6 +20,12 @@ elif [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
   . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 fi
 
+# Start Nix daemon if not running (required with --init none)
+if ! pgrep -f nix-daemon >/dev/null 2>&1; then
+  sudo /nix/var/nix/profiles/default/bin/nix-daemon &
+  sleep 2
+fi
+
 # 2. Run home-manager
 echo "→ Running home-manager switch for vscode"
 nix run home-manager/master -- switch -b backup --flake "${DOTFILES}#vscode"
