@@ -26,18 +26,16 @@ if ! pgrep -f nix-daemon >/dev/null 2>&1; then
   sleep 2
 fi
 
-# 2. Fetch prebuilt Nix cache if available
-CACHE_URL="https://github.com/madeleineostoja/dotfiles/releases/download/devcontainers-cache/devcontainers-nix-cache.tar.gz"
-mkdir -p /tmp/nix-cache
-if curl -fsSL "$CACHE_URL" | tar -xz -C /tmp/nix-cache; then
-  export NIX_CONFIG="extra-substituters = file:///tmp/nix-cache
-require-sigs = false"
-else
-  echo "  cache unavailable, falling back to upstream substituters"
+# 2. Import prebuilt closure if available
+CACHE_URL="https://github.com/madeleineostoja/dotfiles/releases/download/devcontainers-cache/devcontainers-closure.nar.gz"
+echo "→ Importing prebuilt closure"
+if ! curl -fsSL "$CACHE_URL" | gunzip | nix-store --import >/dev/null; then
+  echo "  closure unavailable, will build from upstream"
 fi
 
-# 3. Run home-manager
-echo "→ Running home-manager switch for vscode"
-nix run home-manager/master -- switch -b backup --flake "${DOTFILES}#vscode"
+# 3. Build and activate home-manager configuration
+echo "→ Activating home-manager configuration for vscode"
+out=$(nix build --no-link --print-out-paths "${DOTFILES}#homeConfigurations.vscode.activationPackage")
+"$out/activate"
 
 echo "✓ install complete"
