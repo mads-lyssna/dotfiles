@@ -45,7 +45,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
 
 # 5. Dotfiles
-git clone https://github.com/madeleineostoja/dotfiles.git
+git clone https://github.com/mads-lyssna/dotfiles.git
 chflags hidden dotfiles
 
 # 6. Bootstrap`
@@ -117,11 +117,6 @@ If broken: `nixsync --rollback`.
 
 - **Pearcleaner** — orphan-files scan after removing apps
 - **DaisyDisk** — investigating disk-full situations
-
-## Branches
-
-- **`main`**: Personal configs
-- **`work`**: Work fork
 
 ## Common operations
 

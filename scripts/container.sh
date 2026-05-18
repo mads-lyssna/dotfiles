@@ -27,9 +27,9 @@ if ! pgrep -f nix-daemon >/dev/null 2>&1; then
 fi
 
 # 2. Import prebuilt closure if available
-CACHE_URL="https://github.com/mads-lyssna/dotfiles/releases/download/devcontainers-cache/devcontainers-closure.nar.gz"
+CACHE_URL="https://github.com/mads-lyssna/dotfiles/releases/download/devcontainers-cache/devcontainers-closure.nar.zst"
 echo "→ Importing prebuilt closure"
-if ! curl -fsSL "$CACHE_URL" | gunzip | nix-store --import >/dev/null; then
+if ! curl -fsSL "$CACHE_URL" | zstd -d | nix-store --import >/dev/null; then
   echo "  closure unavailable, will build from upstream"
 fi
 

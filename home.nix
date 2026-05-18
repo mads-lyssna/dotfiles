@@ -26,34 +26,34 @@ in
   ];
 
   # Packages
-  home.packages = with pkgs; [
-    # Shell
-    starship
+  home.packages =
+    with pkgs;
+    [
+      # Shell
+      starship
 
-    # CLI tools
-    bat
-    eza
-    ripgrep
-    fd
-    fzf
-    dust
-    hyperfine
+      # CLI tools
+      bat
+      eza
+      ripgrep
+      fd
+      fzf
+      dust
+      hyperfine
 
-    # Git
-    git
-    delta
-    gh
-    worktrunk
-
-    # Dev
-    mise
-    pnpm
-    nixfmt
-    devcontainer
-
-    # Other
-    claude-code
-  ];
+      # Git
+      git
+      delta
+      gh
+      worktrunk
+    ]
+    ++ lib.optionals isDarwin [
+      nixfmt
+      mise
+      pnpm
+      devcontainer
+      claude-code
+    ];
 
   # Environment
   home.sessionVariables = {

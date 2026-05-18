@@ -21,9 +21,9 @@ jobs:
       - name: Build and export vscode closure
         run: |
           out=$(nix build .#homeConfigurations.vscode.activationPackage --print-out-paths --no-link)
-          nix-store --export $(nix-store --query --requisites "$out") | gzip > devcontainers-closure.nar.gz
+          nix-store --export $(nix-store --query --requisites "$out") | zstd -T0 -19 > devcontainers-closure.nar.zst
       - uses: softprops/action-gh-release@v2
         with:
           tag_name: devcontainers-cache
-          files: devcontainers-closure.nar.gz
+          files: devcontainers-closure.nar.zst
           make_latest: false
