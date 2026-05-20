@@ -2,7 +2,7 @@
 
 - Always read documentation and search for reported bugs before going through source code
 - If available, always use the Context7 MCP when you need documentation
-- Avoid writing superfluous comments that state what is obvious from reading code
+- Default to writing no code comments. Only add one when the "why" is non-obvious — a hidden constraint, subtle invariant, bug workaround, or surprising behaviour. Don't restate what the code does, don't label sections, don't annotate every change
 - Always confirm implementation plans with the user before writing any code or requesting changes. When the user responds to multiple items, read each response individually — questions or pushback on an item are not approval.
 
 ## Context efficient commands
@@ -23,4 +23,4 @@ The following non-standard CLI tools are available for you to use:
 
 ## Commit preferences
 
-Follow a lightweight Conventional Commit pattern for commit messages: `<type>: <brief description>`.  Add a body (after a blank line) ONLY if there is non-obvious context worth recording.
+Follow a lightweight Conventional Commit pattern for commit messages: `<type>: <brief description>`. Add a body (after a blank line) ONLY if there is non-obvious context worth recording.
