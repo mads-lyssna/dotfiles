@@ -46,6 +46,9 @@ in
       delta
       gh
       worktrunk
+
+      # Services
+      awscli2
     ]
     ++ lib.optionals isDarwin [
       nixfmt
