@@ -36,6 +36,6 @@ fi
 # 3. Build and activate home-manager configuration
 echo "→ Activating home-manager configuration for vscode"
 out=$(nix build --no-link --print-out-paths "${DOTFILES}#homeConfigurations.vscode.activationPackage")
-"$out/activate"
+HOME_MANAGER_BACKUP_EXT=hm-bak "$out/activate"
 
 echo "✓ install complete"
