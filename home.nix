@@ -47,8 +47,11 @@ in
       gh
       worktrunk
 
-      # Services
+      # Work Services
       awscli2
+      buildkite-cli
+      sentry-cli 
+      heroku
     ]
     ++ lib.optionals isDarwin [
       nixfmt
