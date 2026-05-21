@@ -47,9 +47,6 @@ in
       gh
       worktrunk
 
-      # Other
-      pi-coding-agent
-
       # Work Services
       awscli2
       buildkite-cli
@@ -73,8 +70,8 @@ in
     AWS_REGION = "us-east-1";
   };
 
-  # Fix PNPM global installs
-  home.sessionPath = [ pnpmHome ];
+  # PNPM setup
+  home.sessionPath = [ "${pnpmHome}/bin" ];
 
   # Config files
   home.file = {
