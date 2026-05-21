@@ -81,6 +81,10 @@
     settings = {
       git_status.disabled = true;
       nodejs.symbol = "󰎙 ";
+      aws = {
+        format = "on [$symbol$profile]($style) ";
+        symbol = "󰸏 ";
+      };
     };
   };
 

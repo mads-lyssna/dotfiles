@@ -69,6 +69,8 @@ in
     EDITOR = "code --wait";
     VISUAL = "code --wait";
     PNPM_HOME = pnpmHome;
+    AWS_PROFILE = "development";
+    AWS_REGION = "us-east-1";
   };
 
   # Fix PNPM global installs
