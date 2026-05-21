@@ -47,6 +47,9 @@ in
       gh
       worktrunk
 
+      # Other
+      pi-coding-agent
+
       # Work Services
       awscli2
       buildkite-cli
