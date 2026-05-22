@@ -70,8 +70,12 @@ in
     AWS_REGION = "us-east-1";
   };
 
-  # PNPM setup
-  home.sessionPath = [ "${pnpmHome}/bin" ];
+  # PNPM setup — pnpm 11 stores binaries in $PNPM_HOME/bin, but still checks
+  # that $PNPM_HOME itself is on PATH, so include both.
+  home.sessionPath = [
+    pnpmHome
+    "${pnpmHome}/bin"
+  ];
 
   # Config files
   home.file = {
