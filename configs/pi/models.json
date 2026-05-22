@@ -1,0 +1,14 @@
+{
+  "providers": {
+    "amazon-bedrock": {
+      "modelOverrides": {
+        "us.anthropic.claude-opus-4-7": {
+          "name": "Opus 4.7"
+        },
+        "moonshotai.kimi-k2.5": {
+          "name": "Kimi K2.5"
+        }
+      }
+    }
+  }
+}

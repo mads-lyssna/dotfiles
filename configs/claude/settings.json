@@ -13,15 +13,15 @@
       "Bash(fd:*)",
       "Bash(ls:*)"
     ],
-    "deny": ["Read(./.env)", "Read(./.env.*)"],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)"
+    ],
     "defaultMode": "auto"
   },
-  "theme": "dark",
   "model": "opus[1m]",
-  "skipAutoPermissionPrompt": true,
   "spinnerTipsEnabled": false,
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/statusline-command.sh"
-  }
+  "theme": "dark",
+  "skipAutoPermissionPrompt": true,
+  "effortLevel": "medium"
 }

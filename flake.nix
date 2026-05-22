@@ -7,10 +7,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agents = {
+      url = "github:madeleineostoja/agents";
+      flake = false;
+    };
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }:
+    inputs@{ nixpkgs, home-manager, agents, ... }:
     let
       mkHome =
         { system, homeDirectory }:
@@ -20,7 +24,7 @@
             config.allowUnfree = true;
           };
           modules = [ ./home.nix ];
-          extraSpecialArgs = { inherit homeDirectory; };
+          extraSpecialArgs = { inherit homeDirectory agents; };
         };
     in
     {

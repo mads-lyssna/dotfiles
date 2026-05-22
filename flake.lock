@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "agents": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1779428203,
+        "narHash": "sha256-HCwOCg37NyvkCQltle93tOa15K6s4yqGn94YFrXili4=",
+        "owner": "madeleineostoja",
+        "repo": "agents",
+        "rev": "69472ce65b55eec6ec94df96f4f553203fbf75b3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "madeleineostoja",
+        "repo": "agents",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -38,6 +54,7 @@
     },
     "root": {
       "inputs": {
+        "agents": "agents",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs"
       }

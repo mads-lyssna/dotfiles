@@ -3,6 +3,7 @@
   pkgs,
   lib,
   homeDirectory,
+  agents,
   ...
 }:
 
@@ -73,8 +74,7 @@ in
     AWS_REGION = "us-east-1";
   };
 
-  # PNPM setup — pnpm 11 stores binaries in $PNPM_HOME/bin, but still checks
-  # that $PNPM_HOME itself is on PATH, so include both.
+  # PNPM setup
   home.sessionPath = [
     pnpmHome
     "${pnpmHome}/bin"
@@ -82,17 +82,28 @@ in
 
   # Config files
   home.file = {
+    # Git
     ".config/git/config".source = mkLink "configs/git/config";
     ".config/git/ignore".source = mkLink "configs/git/ignore";
 
-    # Claude
-    ".claude/CLAUDE.md".source = mkLink "configs/claude/CLAUDE.md";
-    ".claude/settings.json".source = mkLink "configs/claude/settings.json";
-    ".claude/statusline-command.sh".source = mkLink "configs/claude/statusline-command.sh";
-    ".claude/skills" = {
-      source = mkLink "configs/claude/skills";
+    # Pi
+    ".pi/agent/settings.json".source = mkLink "configs/pi/settings.json";
+    ".pi/agent/models.json".source = mkLink "configs/pi/models.json";
+    ".pi/agent/keybindings.json".source = mkLink "configs/pi/keybindings.json";
+    ".pi/agent/AGENTS.md".source = "${agents}/AGENTS.md";
+    ".pi/agent/skills" = {
+      source = "${agents}/skills";
       recursive = true;
     };
+
+    # Claude
+    ".claude/settings.json".source = mkLink "configs/claude/settings.json";
+    ".claude/CLAUDE.md".source = "${agents}/AGENTS.md";
+    ".claude/skills" = {
+      source = "${agents}/skills";
+      recursive = true;
+    };
+
   }
   // lib.optionalAttrs isDarwin {
     ".ssh/config".source = mkLink "configs/ssh";

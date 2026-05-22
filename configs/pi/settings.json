@@ -1,0 +1,22 @@
+{
+  "lastChangelogVersion": "0.75.4",
+  "defaultProvider": "amazon-bedrock",
+  "defaultModel": "us.anthropic.claude-opus-4-7",
+  "defaultThinkingLevel": "high",
+  "enabledModels": [
+    "amazon-bedrock/moonshotai.kimi-k2.5",
+    "anthropic/claude-opus-4-7"
+  ],
+  "hideThinkingBlock": false,
+  "steeringMode": "all",
+  "followUpMode": "all",
+  "collapseChangelog": true,
+  "quietStartup": true,
+  "enableInstallTelemetry": false,
+  "theme": "catppuccin-mocha",
+  "packages": [
+    "npm:pi-tool-display",
+    "npm:pi-smart-fetch",
+    "npm:@ifi/oh-pi-themes"
+  ]
+}
