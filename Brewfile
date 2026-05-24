@@ -11,14 +11,14 @@ cask "figma"
 
 # Development
 cask "ghostty"
-cask "visual-studio-code"
+cask "zed"
 cask "orbstack"
 
 # Utilities
 cask "hammerspoon"
 cask "hyperkey"
 cask "rectangle"
-cask "monitorcontrol" 
+cask "monitorcontrol"
 cask "keepingyouawake"
 cask "pearcleaner"
 cask "keka"

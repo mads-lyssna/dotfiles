@@ -7,7 +7,6 @@ My personal workstation configuration, running on a Macbook Pro
 - **Nix + home-manager** — packages, shell, shell-integrated tools
 - **Homebrew** — GUI casks and fonts (`Brewfile`)
 - **mise** — per-project language runtimes
-- **VSCode Settings Sync** — IDE state
 
 ## Repo layout
 
@@ -81,14 +80,13 @@ Create the three Spaces first via Mission Control (3-finger swipe up, click +).
 
 - **Rectangle** — accessibility permissions, launch on login
 - **MonitorControl** — accessibility permissions, launch on login
-- **VSCode** — sign into Settings Sync
 - **Time Machine** — add backup disk, exclude `~/Code`, `~/.cache`, `/nix`, `/nix/store`, `~/Library/Caches`
 
 ## Maintenance
 
 ### Continuous (automatic)
 
-MacOS security patches, browsers, VSCode, Claude desktop, casks with built-in updaters all self-update.
+MacOS security patches, browsers, Zed, casks with built-in updaters all self-update.
 
 ### Weekly (automatic via launch agent)
 

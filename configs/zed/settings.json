@@ -1,0 +1,110 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "edit_predictions": {
+    "mode": "subtle"
+  },
+  "preview_tabs": {
+    "enabled": false
+  },
+  "inline_code_actions": false,
+  "prettier": {
+    "parser": ""
+  },
+  "languages": {
+    "Markdown": {
+      "remove_trailing_whitespace_on_save": false,
+      "format_on_save": "on"
+    }
+  },
+  "buffer_font_weight": 300.0,
+  "text_rendering_mode": "subpixel",
+  "git": {
+    "inline_blame": {
+      "enabled": false,
+    },
+  },
+  "toolbar": {
+    "code_actions": false,
+    "quick_actions": false,
+    "agent_review": true,
+    "breadcrumbs": true,
+  },
+  "minimap": {
+    "show": "never",
+  },
+  "gutter": {
+    "min_line_number_digits": 3,
+    "runnables": false,
+  },
+  "show_wrap_guides": true,
+  "outline_panel": {
+    "indent_size": 16.0,
+    "dock": "left",
+  },
+  "collaboration_panel": {
+    "dock": "left",
+  },
+  "git_panel": {
+    "dock": "left",
+  },
+  "agent_servers": {
+    "pi-acp": {
+      "type": "registry",
+    },
+  },
+  "buffer_line_height": "comfortable",
+  "proxy": "",
+  "agent": {
+    "default_width": 500.0,
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+  "ui_font_family": ".ZedSans",
+  "cli_default_open_behavior": "new_window",
+  "when_closing_with_no_tabs": "keep_window_open",
+  "icon_theme": "Catppuccin Mocha",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "terminal": {
+    "font_size": 13.0,
+    "font_weight": 300.0,
+    "shell": "system",
+    "font_family": "MonaspiceNe Nerd Font",
+    "font_fallbacks": ["Menlo", "Monaco", "Courier New"],
+  },
+  "project_panel": {
+    "entry_spacing": "comfortable",
+    "hide_root": false,
+    "hide_hidden": false,
+    "indent_size": 16.0,
+    "git_status": true,
+    "hide_gitignore": true,
+    "default_width": 250.0,
+    "dock": "left",
+    "auto_fold_dirs": false,
+  },
+  "base_keymap": "VSCode",
+  "buffer_font_family": "Monaspace Argon",
+  "buffer_font_fallbacks": ["Menlo", "Monaco"],
+  "file_types": {
+    "env": ["*.env.*", ".env"],
+  },
+  "linked_edits": true,
+  "tab_size": 2,
+  "ui_font_size": 16,
+  "buffer_font_size": 13.0,
+  "theme": "Catppuccin Macchiato - No Italics",
+}

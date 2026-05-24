@@ -2,7 +2,7 @@ local hyper = { "cmd", "ctrl", "alt", "shift" }
 
 local apps = {
   t = "com.mitchellh.ghostty",
-  x = "com.microsoft.VSCode",
+  x = "dev.zed.Zed",
   b = "net.imput.helium",
   w = "net.imput.helium",
   c = "com.apple.iCal",

@@ -54,7 +54,7 @@ in
       # Work Services
       awscli2
       buildkite-cli
-      sentry-cli 
+      sentry-cli
       heroku
     ]
     ++ lib.optionals isDarwin [
@@ -67,8 +67,8 @@ in
 
   # Environment
   home.sessionVariables = {
-    EDITOR = "code --wait";
-    VISUAL = "code --wait";
+    EDITOR = "zed --wait";
+    VISUAL = "zed --wait";
     PNPM_HOME = pnpmHome;
     AWS_PROFILE = "development";
     AWS_REGION = "us-east-1";
@@ -90,11 +90,16 @@ in
     ".pi/agent/settings.json".source = mkLink "configs/pi/settings.json";
     ".pi/agent/models.json".source = mkLink "configs/pi/models.json";
     ".pi/agent/keybindings.json".source = mkLink "configs/pi/keybindings.json";
-    ".pi/agent/AGENTS.md".source = "${agents}/AGENTS.md";
-    ".pi/agent/skills" = {
-      source = "${agents}/skills";
+    ".pi/agent/themes/theme.json".source = mkLink "configs/pi/theme.json";
+    ".pi/agent/extensions".source = mkLink "configs/pi/extensions";
+    ".pi/agent" = {
+      source = "${agents}";
       recursive = true;
     };
+
+    # Zed
+    ".config/zed/settings.json".source = mkLink "configs/zed/settings.json";
+    ".config/zed/keymap.json".source = mkLink "configs/zed/keymap.json";
 
     # Claude
     ".claude/settings.json".source = mkLink "configs/claude/settings.json";
