@@ -1,5 +1,4 @@
 {
-  "respectGitignore": false,
   "attribution": {
     "commit": "",
     "pr": ""
@@ -13,10 +12,7 @@
       "Bash(fd:*)",
       "Bash(ls:*)"
     ],
-    "deny": [
-      "Read(./.env)",
-      "Read(./.env.*)"
-    ],
+    "deny": ["Read(./.env)", "Read(./.env.*)"],
     "defaultMode": "auto"
   },
   "model": "opus[1m]",

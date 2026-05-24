@@ -13,10 +13,10 @@
   "collapseChangelog": true,
   "quietStartup": true,
   "enableInstallTelemetry": false,
-  "theme": "catppuccin-mocha",
+  "theme": "catppuccin-macchiato",
   "packages": [
     "npm:pi-tool-display",
     "npm:pi-smart-fetch",
-    "npm:@ifi/oh-pi-themes"
+    "git:github.com/madeleineostoja/pi-extensions"
   ]
 }
