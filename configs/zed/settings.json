@@ -8,20 +8,20 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "edit_predictions": {
-    "mode": "subtle"
+    "mode": "subtle",
   },
   "preview_tabs": {
-    "enabled": false
+    "enabled": false,
   },
   "inline_code_actions": false,
   "prettier": {
-    "parser": ""
+    "parser": "",
   },
   "languages": {
     "Markdown": {
       "remove_trailing_whitespace_on_save": false,
-      "format_on_save": "on"
-    }
+      "format_on_save": "on",
+    },
   },
   "buffer_font_weight": 300.0,
   "text_rendering_mode": "subpixel",
@@ -70,7 +70,11 @@
   "ui_font_family": ".ZedSans",
   "cli_default_open_behavior": "new_window",
   "when_closing_with_no_tabs": "keep_window_open",
-  "icon_theme": "Catppuccin Mocha",
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Catppuccin Macchiato",
+    "dark": "Catppuccin Macchiato",
+  },
   "telemetry": {
     "diagnostics": false,
     "metrics": false,
@@ -106,5 +110,9 @@
   "tab_size": 2,
   "ui_font_size": 16,
   "buffer_font_size": 13.0,
-  "theme": "Catppuccin Macchiato - No Italics",
+  "theme": {
+    "mode": "dark",
+    "light": "Catppuccin Latte - No Italics",
+    "dark": "Catppuccin Macchiato - No Italics",
+  },
 }
