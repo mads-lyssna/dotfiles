@@ -18,6 +18,5 @@
   "model": "opus[1m]",
   "spinnerTipsEnabled": false,
   "theme": "dark",
-  "skipAutoPermissionPrompt": true,
-  "effortLevel": "medium"
+  "skipAutoPermissionPrompt": true
 }
