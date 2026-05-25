@@ -13,6 +13,12 @@ let
   isDarwin = pkgs.stdenv.isDarwin;
   pnpmHome =
     if isDarwin then "${homeDirectory}/Library/pnpm" else "${homeDirectory}/.local/share/pnpm";
+
+  # Global pnpm packages, if a nix package isn't available or updated enough
+  pnpmGlobals = [
+    "sentry"
+    "@earendil-works/pi-coding-agent"
+  ];
 in
 {
   home.username = baseNameOf homeDirectory;
@@ -78,6 +84,17 @@ in
     pnpmHome
     "${pnpmHome}/bin"
   ];
+
+  # Ensure global pnpm packages are installed
+  home.activation.pnpmGlobals = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    export PNPM_HOME="${pnpmHome}"
+    export PATH="${pkgs.nodejs}/bin:${pkgs.pnpm}/bin:$PNPM_HOME:$PATH"
+    for pkg in ${lib.escapeShellArgs pnpmGlobals}; do
+      if ! ${pkgs.pnpm}/bin/pnpm ls -g --depth=0 2>/dev/null | grep -q "$pkg"; then
+        run ${pkgs.pnpm}/bin/pnpm add -g "$pkg"
+      fi
+    done
+  '';
 
   # Config files
   home.file = {

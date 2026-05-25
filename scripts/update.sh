@@ -50,6 +50,13 @@ if command -v mise >/dev/null 2>&1; then
   mise plugin update || echo "⚠️  mise plugin update had issues"
 fi
 
+# --- pnpm globals ---
+if command -v pnpm >/dev/null 2>&1; then
+  echo
+  echo "▶ pnpm update -g --latest..."
+  pnpm update -g --latest || echo "⚠️  pnpm global update had issues"
+fi
+
 end_time=$(date +%s)
 duration=$((end_time - start_time))
 echo
