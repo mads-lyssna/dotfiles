@@ -29,7 +29,7 @@
       pn = "pnpm";
       sb = "supabase";
       cc = "claude";
-      dc = "devcontainer"
+      dc = "devcontainer";
 
       # Git
       g = "git";
