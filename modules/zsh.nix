@@ -29,6 +29,7 @@
       pn = "pnpm";
       sb = "supabase";
       cc = "claude";
+      dc = "devcontainer"
 
       # Git
       g = "git";
@@ -60,7 +61,6 @@
       nixsync = "cd ~/dotfiles && nix flake update agents && home-manager switch --flake .";
       brewsync = "brew bundle install --cleanup --force --zap --file=~/dotfiles/Brewfile";
       sysupdate = "~/dotfiles/scripts/update.sh";
-      devshell = ''devcontainer up --workspace-folder "$PWD" >/dev/null && devcontainer exec --workspace-folder "$PWD" zsh && cd ~/dotfiles && git fetch origin work && git checkout -B work FETCH_HEAD && scripts/container.sh && cd ~/app'';
       devclean = "docker system prune --volumes";
     };
 
@@ -70,7 +70,6 @@
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
       export SSH_AUTH_SOCK=~/.1password/agent.sock
-
       if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
     '';
   };
@@ -81,6 +80,8 @@
     settings = {
       git_status.disabled = true;
       nodejs.symbol = "󰎙 ";
+      ruby.symbol = " ";
+      docker_context.symbol = " ";
       aws = {
         format = "on [$symbol$profile]($style) ";
         symbol = "󰸏 ";
