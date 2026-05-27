@@ -74,6 +74,7 @@ in
   home.sessionVariables = {
     EDITOR = "zed --wait";
     VISUAL = "zed --wait";
+    COLORTERM = "truecolor";
     PNPM_HOME = pnpmHome;
     AWS_PROFILE = "development";
     AWS_REGION = "us-east-1";
