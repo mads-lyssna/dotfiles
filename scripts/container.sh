@@ -20,6 +20,11 @@ elif [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
   . "$HOME/.nix-profile/etc/profile.d/nix.sh"
 fi
 
+# Allow the current user to import the unsigned prebuilt closure (daemon reads this at startup)
+if ! grep -q '^trusted-users' /etc/nix/nix.conf 2>/dev/null; then
+  echo "trusted-users = root $(whoami)" | sudo tee -a /etc/nix/nix.conf >/dev/null
+fi
+
 # Start Nix daemon if not running (required with --init none)
 if ! pgrep -f nix-daemon >/dev/null 2>&1; then
   sudo /nix/var/nix/profiles/default/bin/nix-daemon &
