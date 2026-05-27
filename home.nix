@@ -116,19 +116,18 @@ in
     # Zed
     ".config/zed/settings.json".source = mkLink "configs/zed/settings.json";
     ".config/zed/keymap.json".source = mkLink "configs/zed/keymap.json";
+  }
+  // lib.optionalAttrs isDarwin {
+    ".ssh/config".source = mkLink "configs/ssh";
+    ".config/ghostty/config".source = mkLink "configs/ghostty";
+    ".hammerspoon/init.lua".source = mkLink "configs/hammerspoon.lua";
 
-    # Claude
+    # Claude — managed only on the host; the devcontainer bind-mounts ~/.claude
     ".claude/settings.json".source = mkLink "configs/claude/settings.json";
     ".claude/CLAUDE.md".source = "${agents}/AGENTS.md";
     ".claude/skills" = {
       source = "${agents}/skills";
       recursive = true;
     };
-
-  }
-  // lib.optionalAttrs isDarwin {
-    ".ssh/config".source = mkLink "configs/ssh";
-    ".config/ghostty/config".source = mkLink "configs/ghostty";
-    ".hammerspoon/init.lua".source = mkLink "configs/hammerspoon.lua";
   };
 }
