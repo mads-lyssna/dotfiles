@@ -16,7 +16,7 @@ dotfiles/
 ├── flake.lock                       # Pinned versions
 ├── home.nix                         # home-manager config
 ├── Brewfile                         # GUI casks and fonts
-├── modules/zsh.nix                  # Shell + integrated tools
+├── modules/shell.nix                # Shell + integrated tools
 ├── config/*                         # Standalone dotfiles
 ├── launchd/com.user.nix-gc.plist    # Launch agent for GC
 ├── scripts
@@ -98,7 +98,7 @@ MacOS security patches, browsers, Zed, casks with built-in updaters all self-upd
 sysupdate
 ```
 
-Runs `scripts/update.sh`: brew update/upgrade, Brewfile reconcile with `--zap`, `nix flake update`, `nixsync`, mise plugin update.
+Runs `scripts/update.sh`: brew update/upgrade, Brewfile reconcile with `--zap`, `nix flake update`, `home-manager switch`, mise plugin update.
 
 After:
 
@@ -122,7 +122,7 @@ If broken: `nixsync --rollback`.
 Edit `home.nix` → `home.packages`. Run `nixsync`.
 
 **Add a CLI tool (with shell integration):**
-Edit `modules/zsh.nix` → add `programs.<tool>` block with `enableZshIntegration = true`. Run `nixsync`.
+Edit `modules/shell.nix` → add `programs.<tool>` block with `enableZshIntegration = true`. Run `nixsync`.
 
 **Add a GUI app:**
 Edit `Brewfile` → `cask "name"`. Run `brew bundle install`.
@@ -139,7 +139,7 @@ Run `nixsync`.
 **Edit existing config:**
 
 - Non-shell (gitconfig, ghostty, ssh, claude): edit in repo, immediately live.
-- Shell (zsh, starship, mise, atuin, fzf): edit `modules/zsh.nix`, run `nixsync`.
+- Shell (zsh, starship, mise, fzf): edit `modules/shell.nix`, run `nixsync`.
 
 **Roll back:**
 

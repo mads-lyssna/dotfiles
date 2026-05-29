@@ -28,9 +28,15 @@ in
 
   programs.home-manager.enable = true;
 
+  catppuccin = {
+    flavor = "macchiato";
+    accent = "mauve";
+  };
+
   # Modules
   imports = [
-    ./modules/zsh.nix
+    ./modules/git.nix
+    ./modules/shell.nix
   ];
 
   # Packages
@@ -42,17 +48,13 @@ in
 
       # CLI tools
       bat
-      eza
       ripgrep
       fd
       fzf
       dust
-      hyperfine
 
       # Git
-      git
-      delta
-      gh
+      lazygit
       worktrunk
 
       # Other
@@ -100,8 +102,6 @@ in
 
   # Config files
   home.file = {
-    # Git
-    ".config/git/config".source = mkLink "configs/git/config";
     ".config/git/ignore".source = mkLink "configs/git/ignore";
 
     # Pi

@@ -1,10 +1,35 @@
-{ config, pkgs, ... }:
+{ lib, ... }:
 
 {
+  home.sessionVariables = {
+    BAT_THEME = "Catppuccin Macchiato";
+    GH_COLOR_LABELS = "1";
+    MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+    RG_COLORS = lib.concatStringsSep ":" [
+      "path:fg:0x8a,0xad,0xf4"
+      "line:fg:0xa6,0xda,0x95"
+      "column:fg:0xee,0xd4,0x9f"
+      "match:fg:0xed,0x87,0x96"
+      "match:style:bold"
+    ];
+  };
+
+  catppuccin = {
+    bat.enable = true;
+    eza.enable = true;
+    fzf.enable = true;
+    lazygit.enable = true;
+    starship.enable = true;
+    zsh-syntax-highlighting.enable = true;
+  };
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    autosuggestion.enable = true;
+    autosuggestion = {
+      enable = true;
+      highlight = "fg=#6e738d";
+    };
     syntaxHighlighting.enable = true;
 
     history = {
@@ -29,6 +54,7 @@
       pn = "pnpm";
       sb = "supabase";
       cc = "claude";
+      z = "zed";
       dc = "devcontainer";
 
       # Git
@@ -43,6 +69,7 @@
       gab = "git checkout -b";
       gcb = "git checkout";
       grmb = "git branch -D";
+      grmrb = "git push origin --delete";
       grmtag = "git tag -d";
       gdis = "git checkout --";
       glog = "git log --graph";
@@ -55,13 +82,11 @@
       gcp = "git cherry-pick";
       gr = "git rebase";
       gf = "git fetch";
-      lg = "lazygit";
 
       # Shortcuts
-      nixsync = "cd ~/dotfiles && nix flake update agents && home-manager switch --flake .";
+      nixsync = "cd ~/dotfiles && nix flake update && home-manager switch --flake .";
       brewsync = "brew bundle install --cleanup --force --zap --file=~/dotfiles/Brewfile";
       sysupdate = "~/dotfiles/scripts/update.sh";
-      devclean = "docker system prune --volumes";
     };
 
     initContent = ''
@@ -69,7 +94,6 @@
       zstyle ':completion:*' menu select
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-      export SSH_AUTH_SOCK=~/.1password/agent.sock
       if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
     '';
   };
@@ -78,13 +102,30 @@
     enable = true;
     enableZshIntegration = true;
     settings = {
+      character = {
+        success_symbol = "[❯](peach)";
+        error_symbol = "[❯](red)";
+      };
+      directory = {
+        style = "bold lavender";
+        read_only = " 󰌾";
+      };
+      git_branch = {
+        style = "bold mauve";
+        symbol = " ";
+      };
+      git_commit.tag_symbol = "  ";
       git_status.disabled = true;
+      package.symbol = "󰏗 ";
       nodejs.symbol = "󰎙 ";
-      ruby.symbol = " ";
+      python.symbol = " ";
+      ruby.symbol = " ";
+      nix_shell.symbol = " ";
       docker_context.symbol = " ";
+      container.symbol = " ";
       aws = {
-        format = "on [$symbol$profile]($style) ";
         symbol = "󰸏 ";
+        format = "on [$symbol($profile )]($style)";
       };
     };
   };
@@ -94,19 +135,31 @@
     enableZshIntegration = true;
   };
 
+  programs.bat = {
+    enable = true;
+    config.pager = "less -FR";
+  };
+
+  programs.eza = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.lazygit = {
+    enable = true;
+    package = null;
+    enableZshIntegration = true;
+  };
+
   programs.mise = {
     enable = true;
     enableZshIntegration = true;
     globalConfig = {
       tools = {
         node = "lts";
-        ruby = "4.0";
-      };
-      settings = {
-        ruby.compile = false;
-        idiomatic_version_file_enable_tools = [ "ruby" ];
+        python = "3.12";
+        ruby = "4.0.4";
       };
     };
   };
-
 }

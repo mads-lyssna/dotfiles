@@ -11,7 +11,7 @@
     "mode": "subtle",
   },
   "preview_tabs": {
-    "enabled": true,
+    "enabled": false,
   },
   "inline_code_actions": false,
   "prettier": {

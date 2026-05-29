@@ -11,10 +11,25 @@
       url = "github:madeleineostoja/agents";
       flake = false;
     };
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    catppuccin-godot = {
+      url = "github:catppuccin/godot";
+      flake = false;
+    };
   };
 
   outputs =
-    inputs@{ nixpkgs, home-manager, agents, ... }:
+    inputs@{
+      nixpkgs,
+      home-manager,
+      agents,
+      catppuccin,
+      catppuccin-godot,
+      ...
+    }:
     let
       mkHome =
         { system, homeDirectory }:
@@ -23,8 +38,17 @@
             inherit system;
             config.allowUnfree = true;
           };
-          modules = [ ./home.nix ];
-          extraSpecialArgs = { inherit homeDirectory agents; };
+          modules = [
+            ./home.nix
+            catppuccin.homeModules.catppuccin
+          ];
+          extraSpecialArgs = {
+            inherit
+              homeDirectory
+              agents
+              catppuccin-godot
+              ;
+          };
         };
     in
     {
