@@ -2,8 +2,8 @@
   "providers": {
     "openrouter": {
       "modelOverrides": {
-        "anthropic/claude-opus-4.7": {
-          "name": "Opus 4.7"
+        "anthropic/claude-opus-4.8": {
+          "name": "Opus 4.8"
         },
         "moonshotai/kimi-k2.6": {
           "name": "Kimi K2.6"
