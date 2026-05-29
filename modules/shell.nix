@@ -16,6 +16,7 @@
   catppuccin = {
     enable = true;
     flavor = "macchiato";
+    zsh-syntax-highlighting.enable = false;
   };
 
   programs.zsh = {
