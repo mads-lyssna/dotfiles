@@ -102,8 +102,6 @@ in
 
   # Config files
   home.file = {
-    ".config/git/ignore".source = mkLink "configs/git/ignore";
-
     # Pi
     ".pi/agent/settings.json".source = mkLink "configs/pi/settings.json";
     ".pi/agent/models.json".source = mkLink "configs/pi/models.json";

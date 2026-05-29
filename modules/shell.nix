@@ -2,7 +2,6 @@
 
 {
   home.sessionVariables = {
-    BAT_THEME = "Catppuccin Macchiato";
     GH_COLOR_LABELS = "1";
     MANPAGER = "sh -c 'col -bx | bat -l man -p'";
     RG_COLORS = lib.concatStringsSep ":" [
@@ -15,12 +14,8 @@
   };
 
   catppuccin = {
-    bat.enable = true;
-    eza.enable = true;
-    fzf.enable = true;
-    lazygit.enable = true;
-    starship.enable = true;
-    zsh-syntax-highlighting.enable = true;
+    enable = true;
+    flavor = "macchiato";
   };
 
   programs.zsh = {

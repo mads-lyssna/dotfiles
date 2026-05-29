@@ -1,10 +1,19 @@
 { ... }:
 
 {
-  catppuccin.delta.enable = true;
   programs.gh.enable = true;
   programs.git = {
     enable = true;
+    ignores = [
+      ".DS_Store"
+      ".AppleDouble"
+      ".LSOverride"
+      "Icon?"
+      "._*"
+      "*.swp"
+      "*.swo"
+      "*~"
+    ];
     settings = {
       user = {
         name = "Madi Ostoja";
@@ -15,7 +24,6 @@
 
       core = {
         pager = "delta";
-        excludesfile = "~/.config/git/ignore";
         editor = "zed --wait";
       };
 
