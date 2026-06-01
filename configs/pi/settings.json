@@ -1,7 +1,7 @@
 {
   "lastChangelogVersion": "0.78.0",
   "defaultProvider": "openrouter",
-  "defaultModel": "anthropic/claude-opus-4.8",
+  "defaultModel": "moonshotai/kimi-k2.6",
   "defaultThinkingLevel": "high",
   "enabledModels": [
     "openrouter/anthropic/claude-opus-4.8",
@@ -17,6 +17,7 @@
   "packages": [
     "npm:pi-tool-display",
     "npm:pi-smart-fetch",
-    "git:github.com/madeleineostoja/pi-extensions"
+    "git:github.com/madeleineostoja/pi-extensions",
+    "npm:@tintinweb/pi-subagents"
   ]
 }
