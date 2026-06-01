@@ -1,0 +1,15 @@
+{
+  "implementer": {
+    "model": "openrouter/moonshotai/kimi-k2.6",
+    "type": "general-purpose"
+  },
+  "reviewer": {
+    "model": "anthropic/claude-opus-4.8",
+    "type": "review"
+  },
+  "planner": {
+    "model": "anthropic/claude-opus-4.8",
+    "type": "explore"
+  },
+  "maxParallel": 4
+}
