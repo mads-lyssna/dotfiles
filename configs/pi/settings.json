@@ -1,11 +1,11 @@
 {
-  "lastChangelogVersion": "0.77.0",
+  "lastChangelogVersion": "0.78.0",
   "defaultProvider": "openrouter",
-  "defaultModel": "anthropic/claude-opus-4.7",
+  "defaultModel": "moonshotai/kimi-k2.6",
   "defaultThinkingLevel": "high",
   "enabledModels": [
-    "openrouter/moonshotai/kimi-k2.6",
-    "openrouter/anthropic/claude-opus-4.8"
+    "openrouter/anthropic/claude-opus-4.8",
+    "openrouter/moonshotai/kimi-k2.6"
   ],
   "hideThinkingBlock": true,
   "steeringMode": "all",

@@ -23,6 +23,13 @@
       "format_on_save": "on",
     },
   },
+  "formatter": [
+    {
+      "language_server": {
+        "name": "oxfmt",
+      },
+    },
+  ],
   "buffer_font_weight": 300.0,
   "text_rendering_mode": "subpixel",
   "git": {
