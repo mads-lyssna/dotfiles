@@ -8,7 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agents = {
-      url = "github:madeleineostoja/agents";
+      url = "github:mads-lyssna/agents";
       flake = false;
     };
     catppuccin = {
