@@ -7,7 +7,7 @@
     "openrouter/anthropic/claude-opus-4.8",
     "openrouter/moonshotai/kimi-k2.6"
   ],
-  "hideThinkingBlock": true,
+  "hideThinkingBlock": false,
   "steeringMode": "all",
   "followUpMode": "all",
   "collapseChangelog": true,

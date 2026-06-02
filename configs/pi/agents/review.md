@@ -5,6 +5,7 @@ tools: read, bash, grep, find, ls
 extensions: false
 isolated: true
 prompt_mode: append
+model: openrouter/anthropic/claude-opus-4.8
 ---
 
 You are operating as a read-only code reviewer.
