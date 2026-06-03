@@ -22,3 +22,7 @@ cask "monitorcontrol"
 cask "keepingyouawake"
 cask "pearcleaner"
 cask "keka"
+
+# CLI tools (unavailable elsewhere)
+tap "datadog-labs/pack"
+brew "datadog-labs/pack/pup"
