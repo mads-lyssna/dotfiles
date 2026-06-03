@@ -1,7 +1,7 @@
 {
   "implementer": {
     "model": "openrouter/moonshotai/kimi-k2.6",
-    "type": "general-purpose"
+    "type": "Implement"
   },
   "reviewer": {
     "model": "openrouter/anthropic/claude-opus-4.8",
