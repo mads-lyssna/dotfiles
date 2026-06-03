@@ -3,10 +3,7 @@
   "defaultProvider": "openrouter",
   "defaultModel": "anthropic/claude-opus-4.8",
   "defaultThinkingLevel": "high",
-  "enabledModels": [
-    "openrouter/anthropic/claude-opus-4.8",
-    "openrouter/moonshotai/kimi-k2.6"
-  ],
+  "enabledModels": ["openrouter/anthropic/claude-opus-4.8", "openrouter/moonshotai/kimi-k2.6"],
   "hideThinkingBlock": false,
   "steeringMode": "all",
   "followUpMode": "all",
