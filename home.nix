@@ -102,6 +102,9 @@ in
 
   # Config files
   home.file = {
+    # CLI
+    ".config/worktrunk/config.toml".source = mkLink "configs/worktrunk.toml";
+
     # Pi
     ".pi/agent/settings.json".source = mkLink "configs/pi/settings.json";
     ".pi/agent/models.json".source = mkLink "configs/pi/models.json";
