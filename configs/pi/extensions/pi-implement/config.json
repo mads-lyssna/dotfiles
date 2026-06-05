@@ -1,10 +1,8 @@
 {
   "implementer": {
-    "model": "openrouter/moonshotai/kimi-k2.6",
     "type": "Implement"
   },
   "reviewer": {
-    "model": "openrouter/anthropic/claude-opus-4.8",
     "type": "review"
   },
   "planner": {
