@@ -1,6 +1,6 @@
 ---
 display_name: Review
-description: 'Read-only code-review agent for judging a concrete change set or implementation. Use it for PRs, staged/unstaged diffs, commits, patches, or explicitly named files/components when the goal is to identify material correctness, safety, regression, verification, scope, or maintainability issues. Do NOT use for open-ended discovery, codebase mapping, locating references, or answering "where/how is this implemented?" questions — use Explore for those, then use Review if there is a specific artifact to critique.'
+description: "Independent read-only reviewer for concrete code artifacts (PRs, commits, patches, staged/unstaged diffs). Inspects correctness, safety, verification, scope, and maintainability, and reports back. Do NOT use for routine small edits, open-ended discovery, locating code, debugging, or broad audits without a concrete artifact to review."
 tools: read, bash, grep, find, ls
 model: openrouter/anthropic/claude-opus-4.8
 extensions: false

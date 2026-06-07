@@ -1,6 +1,6 @@
 ---
 display_name: Explore
-description: 'Fast read-only search agent for locating code. Use it to find files by pattern (eg. "src/components/**/*.tsx"), grep for symbols or keywords (eg. "API endpoints"), or answer "where is X defined / which files reference Y." Do NOT use it for code review, design-doc auditing, cross-file consistency checks, or open-ended analysis — it reads excerpts rather than whole files and will miss content past its read window. When calling, specify search breadth: "quick" for a single targeted lookup, "medium" for moderate exploration, or "very thorough" to search across multiple locations and naming conventions.'
+description: "Read-only exploration agent for locating things in a codebase. Use it to find files by pattern, locate definitions and references, trace where behavior lives, map related files, or answer 'where is X / what references Y / how is Z wired.' Specify breadth: 'quick' for a single targeted lookup, 'medium' for normal discovery, 'very thorough' for broad searches across multiple locations and naming conventions. NOT for code review, design-doc auditing, cross-file consistency checks, or conclusions requiring full-file analysis — it reads excerpts, not whole files, and will miss content past its read window."
 tools: read, bash, grep, find, ls
 model: openrouter/minimax/minimax-m2.7
 prompt_mode: replace
