@@ -3,7 +3,7 @@
     "type": "Implement"
   },
   "reviewer": {
-    "type": "review"
+    "type": "Review"
   },
   "planner": {
     "model": "openrouter/anthropic/claude-opus-4.8",

@@ -5,7 +5,8 @@
   "defaultThinkingLevel": "high",
   "enabledModels": [
     "openrouter/anthropic/claude-opus-4.8",
-    "openrouter/moonshotai/kimi-k2.6"
+    "openrouter/moonshotai/kimi-k2.6",
+    "openrouter/openai/gpt-5.5"
   ],
   "hideThinkingBlock": true,
   "steeringMode": "all",

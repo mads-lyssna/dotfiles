@@ -2,7 +2,7 @@
 display_name: Review
 description: "Independent read-only reviewer for concrete code artifacts (PRs, commits, patches, staged/unstaged diffs). Inspects correctness, safety, verification, scope, and maintainability, and reports back. Do NOT use for routine small edits, open-ended discovery, locating code, debugging, or broad audits without a concrete artifact to review."
 tools: read, bash, grep, find, ls
-model: openrouter/anthropic/claude-opus-4.8
+model: openrouter/openai/gpt-5.5
 extensions: false
 prompt_mode: append
 ---
