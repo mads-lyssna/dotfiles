@@ -1,12 +1,11 @@
 {
-  "lastChangelogVersion": "0.78.1",
+  "lastChangelogVersion": "0.79.1",
   "defaultProvider": "openrouter",
   "defaultModel": "anthropic/claude-opus-4.8",
   "defaultThinkingLevel": "high",
   "enabledModels": [
     "openrouter/anthropic/claude-opus-4.8",
-    "openrouter/moonshotai/kimi-k2.6",
-    "openrouter/openai/gpt-5.5"
+    "openrouter/moonshotai/kimi-k2.6"
   ],
   "hideThinkingBlock": true,
   "steeringMode": "all",
@@ -16,9 +15,8 @@
   "enableInstallTelemetry": false,
   "theme": "catppuccin-macchiato",
   "packages": [
-    "npm:pi-tool-display",
     "npm:pi-smart-fetch",
     "git:github.com/madeleineostoja/pi-extensions",
-    "npm:@tintinweb/pi-subagents"
+    "git:github.com/tintinweb/pi-subagents@feat/96"
   ]
 }
