@@ -152,9 +152,9 @@
     enableZshIntegration = true;
     globalConfig = {
       tools = {
-        node = "lts";
-        python = "3.12";
-        ruby = "4.0.4";
+        node = "latest";
+        python = "latest";
+        ruby = "latest";
       };
     };
   };
