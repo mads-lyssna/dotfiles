@@ -95,7 +95,7 @@ in
     export PATH="${pkgs.nodejs}/bin:${pkgs.pnpm}/bin:$PNPM_HOME/bin:$PATH"
     for pkg in ${lib.escapeShellArgs pnpmGlobals}; do
       if ! ${pkgs.pnpm}/bin/pnpm ls -g --depth=0 2>/dev/null | grep -q "$pkg"; then
-        run ${pkgs.pnpm}/bin/pnpm add -g "$pkg"
+        run ${pkgs.pnpm}/bin/pnpm add -g --ignore-scripts "$pkg"
       fi
     done
   '';
