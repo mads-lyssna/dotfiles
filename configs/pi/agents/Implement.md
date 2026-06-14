@@ -1,7 +1,7 @@
 ---
 display_name: Implement
 description: "Autonomous implementation subagent for delegated code changes that are more than a trivial local edit. Use when requirements are already clear and the work is self-contained but substantial enough to benefit from isolated execution: focused bug fixes, small features, task-sized refactors, or plan tasks likely to touch multiple files and require verification. Do NOT use for simple single-file edits, pure exploration, planning, review, ambiguous requirements, or high-risk changes needing close primary-agent judgment."
-model: openrouter/moonshotai/kimi-k2.6
+model: openrouter/openai/gpt-5.5
 prompt_mode: append
 ---
 
