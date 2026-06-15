@@ -111,7 +111,6 @@ in
     ".pi/agent/keybindings.json".source = mkLink "configs/pi/keybindings.json";
     ".pi/agent/themes/theme.json".source = mkLink "configs/pi/theme.json";
     ".pi/agent/extensions".source = mkLink "configs/pi/extensions";
-    ".pi/agent/agents".source = mkLink "configs/pi/agents";
     ".pi/agent" = {
       source = "${agents}";
       recursive = true;

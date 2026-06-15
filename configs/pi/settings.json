@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.79.1",
+  "lastChangelogVersion": "0.79.3",
   "defaultProvider": "openrouter",
   "defaultModel": "openai/gpt-5.5",
   "defaultThinkingLevel": "high",
@@ -17,7 +17,6 @@
   "theme": "catppuccin-macchiato",
   "packages": [
     "npm:pi-smart-fetch",
-    "git:github.com/madeleineostoja/pi-extensions",
-    "git:github.com/tintinweb/pi-subagents@feat/96"
+    "git:github.com/madeleineostoja/pi-extensions"
   ]
 }

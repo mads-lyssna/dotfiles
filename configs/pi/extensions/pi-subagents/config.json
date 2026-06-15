@@ -1,0 +1,12 @@
+{
+  "agents": {
+    "Explore": {
+      "model": "openrouter/deepseek/deepseek-v4-flash",
+      "thinking": "high"
+    },
+    "Review": {
+      "model": "openrouter/openai/gpt-5.5",
+      "thinking": "xhigh"
+    }
+  }
+}
