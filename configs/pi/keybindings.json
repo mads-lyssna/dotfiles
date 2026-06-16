@@ -1,4 +1,4 @@
 {
-  "app.model.cycleForward": "shift+tab",
-  "app.thinking.cycle": "alt+tab"
+  "app.model.cycleForward": "alt+tab",
+  "app.thinking.cycle": "shift+tab"
 }
