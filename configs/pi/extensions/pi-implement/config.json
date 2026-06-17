@@ -1,6 +1,6 @@
 {
   "implementer": {
-    "model": "openrouter/moonshotai/kimi-k2.7-code",
+    "model": "openrouter/z-ai/glm-5.2",
     "type": "General",
     "thinking": "high"
   },
