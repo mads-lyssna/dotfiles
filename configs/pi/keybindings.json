@@ -1,6 +1,6 @@
 {
   "app.model.cycleForward": "alt+tab",
   "app.thinking.cycle": "shift+tab",
-  "app.editor.external": "ctrl+e",
+  "app.editor.external": "",
   "app.session.rename": ""
 }
