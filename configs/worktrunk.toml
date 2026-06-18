@@ -2,3 +2,4 @@ worktree-path = "{{ repo_path }}/../{{ repo }}.{{ branch | codename(2) }}"
 
 [post-start]
 copy-tmp = "test -d {{ primary_worktree_path }}/tmp && cp -R {{ primary_worktree_path }}/tmp {{ worktree_path }}/ || true"
+mise = "mise trust"
