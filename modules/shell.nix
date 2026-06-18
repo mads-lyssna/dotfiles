@@ -84,6 +84,7 @@
       nixsync = "cd ~/dotfiles && nix flake update && home-manager switch --flake .";
       brewsync = "brew bundle install --cleanup --force --zap --file=~/dotfiles/Brewfile";
       sysupdate = "~/dotfiles/scripts/update.sh";
+      dockerprune = "docker container prune && docker volume rm $(docker volume ls)";
     };
 
     initContent = ''
