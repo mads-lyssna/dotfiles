@@ -52,6 +52,7 @@
       cc = "claude";
       z = "zed";
       dc = "devcontainer";
+      dcu = "devcontainer up && devcontainer exec zsh";
 
       # Git
       g = "git";
