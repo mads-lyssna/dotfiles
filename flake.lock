@@ -3,11 +3,11 @@
     "agents": {
       "flake": false,
       "locked": {
-        "lastModified": 1781572647,
-        "narHash": "sha256-Dqo2hLCk5GXgdE6QqLHUi701Akg9nFs2gOqQOmhuI04=",
+        "lastModified": 1781817402,
+        "narHash": "sha256-tZthkSumbKcRv8OIztxTfNl7aFLQ9S56kL1CRhHzxw0=",
         "owner": "mads-lyssna",
         "repo": "agents",
-        "rev": "491537c4a3c209baab579649ece24fbef2d158da",
+        "rev": "26f51992a2799853f7027ca3167365d1b2a9aa4d",
         "type": "github"
       },
       "original": {
@@ -59,11 +59,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781729244,
-        "narHash": "sha256-vT1hM3l+vH1h9BHhuxkAsJmAPl6Rld7cjLVEGtHGzOA=",
+        "lastModified": 1781810163,
+        "narHash": "sha256-dk8lIk0UnO8GD3e7e3HM1vSYXpbEDmhy67w7KztfdCg=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "c51ac59e59f2a7362d71d1d01ab68b2c09d09347",
+        "rev": "c8f0b8ed441c95bfeaf33555e7631044bb09f384",
         "type": "github"
       },
       "original": {
