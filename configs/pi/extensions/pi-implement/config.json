@@ -1,8 +1,8 @@
 {
   "implementer": {
-    "model": "openrouter/z-ai/glm-5.2",
+    "model": "openrouter/openai/gpt-5.5",
     "type": "General",
-    "thinking": "high"
+    "thinking": "medium"
   },
   "reviewer": {
     "type": "Review"
@@ -10,6 +10,6 @@
   "planner": {
     "model": "openrouter/openai/gpt-5.5",
     "type": "General",
-    "thinking": "medium"
+    "thinking": "high"
   }
 }
