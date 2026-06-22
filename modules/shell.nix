@@ -84,7 +84,6 @@
       nixsync = "cd ~/dotfiles && nix flake update && home-manager switch --flake .";
       brewsync = "brew bundle install --cleanup --force --zap --file=~/dotfiles/Brewfile";
       sysupdate = "~/dotfiles/scripts/update.sh";
-      dockerprune = "docker container prune && docker volume rm $(docker volume ls)";
     };
 
     initContent = ''
@@ -93,6 +92,21 @@
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
       if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+
+      dockerprune() {
+         docker ps -aq --filter label=com.docker.compose.project.config_files | while read -r id; do
+           missing=$(docker inspect -f '{{ index .Config.Labels "com.docker.compose.project.config_files" }}' "$id" \
+             | tr ',' '\n' \
+             | while read -r cfg; do
+                 [[ -f "$cfg" ]] || { echo "$cfg"; break; }
+               done)
+
+           [[ -z "$missing" ]] || docker rm -f "$id"
+         done
+
+         docker container prune -f
+         docker volume prune -af
+       }
     '';
   };
 
