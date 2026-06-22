@@ -1,3 +1,5 @@
-[post-create]
-copy = "wt step copy-ignored"
+[pre-start]
 mise = "mise trust"
+
+[post-start]
+copy = "wt step copy-ignored"
