@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.79.7",
+  "lastChangelogVersion": "0.79.9",
   "defaultProvider": "openrouter",
   "defaultModel": "openai/gpt-5.5",
   "defaultThinkingLevel": "high",
@@ -15,5 +15,8 @@
   "quietStartup": true,
   "enableInstallTelemetry": false,
   "theme": "catppuccin-macchiato",
-  "packages": ["git:github.com/madeleineostoja/pi-extensions", "npm:pi-smart-fetch"]
+  "packages": [
+    "git:github.com/madeleineostoja/pi-extensions",
+    "npm:pi-smart-fetch"
+  ]
 }
