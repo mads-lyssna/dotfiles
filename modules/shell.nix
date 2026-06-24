@@ -81,7 +81,7 @@
       gf = "git fetch";
 
       # Shortcuts
-      nixsync = "cd ~/dotfiles && nix flake update && home-manager switch --flake .";
+      nixsync = "nix flake update agents --flake ~/dotfiles && home-manager switch --flake ~/dotfiles";
       brewsync = "brew bundle install --cleanup --force --zap --file=~/dotfiles/Brewfile";
       sysupdate = "~/dotfiles/scripts/update.sh";
     };
