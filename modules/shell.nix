@@ -79,6 +79,7 @@
       gcp = "git cherry-pick";
       gr = "git rebase";
       gf = "git fetch";
+      gbclean = "git branch --merged main | grep -v '^[* ]*main$' | xargs -r git branch -d";
 
       # Shortcuts
       nixsync = "nix flake update agents --flake ~/dotfiles && home-manager switch --flake ~/dotfiles";
