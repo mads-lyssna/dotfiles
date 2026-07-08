@@ -3,11 +3,11 @@
     "agents": {
       "flake": false,
       "locked": {
-        "lastModified": 1782768017,
-        "narHash": "sha256-8arNIiwXKnAM+IOcEV81CDodJC8H18Chfnbrg7r3s0Y=",
+        "lastModified": 1783052812,
+        "narHash": "sha256-aqtTwIcGvoRH9nyLrwIVia8gezFETRO27biF9+TEUnk=",
         "owner": "mads-lyssna",
         "repo": "agents",
-        "rev": "7beb558bed3ab340fad92978d57ef4d033ee0229",
+        "rev": "48c337f2d3f4e8ddbacc97f097d6827bd3cea36b",
         "type": "github"
       },
       "original": {

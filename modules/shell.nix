@@ -107,6 +107,7 @@
 
          docker container prune -f
          docker volume prune -af
+         docker network prune -f
        }
     '';
   };

@@ -8,66 +8,69 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "edit_predictions": {
-    "mode": "subtle",
+    "mode": "subtle"
   },
   "preview_tabs": {
-    "enabled": false,
+    "enabled": false
   },
   "inline_code_actions": false,
   "prettier": {
-    "parser": "",
+    "parser": ""
   },
   "languages": {
+    "Ruby": {
+      "language_servers": ["ruby-lsp", "rubocop"]
+    },
     "Markdown": {
       "remove_trailing_whitespace_on_save": false,
-      "format_on_save": "on",
-    },
+      "format_on_save": "on"
+    }
   },
   "formatter": [
     {
       "language_server": {
-        "name": "oxfmt",
-      },
-    },
+        "name": "oxfmt"
+      }
+    }
   ],
   "buffer_font_weight": 300.0,
   "text_rendering_mode": "subpixel",
   "git": {
     "inline_blame": {
-      "enabled": false,
-    },
+      "enabled": false
+    }
   },
   "toolbar": {
     "code_actions": false,
     "quick_actions": false,
     "agent_review": true,
-    "breadcrumbs": true,
+    "breadcrumbs": true
   },
   "minimap": {
-    "show": "never",
+    "show": "never"
   },
   "gutter": {
     "min_line_number_digits": 3,
-    "runnables": false,
+    "runnables": false
   },
   "show_wrap_guides": true,
   "outline_panel": {
     "indent_size": 16.0,
-    "dock": "left",
+    "dock": "left"
   },
   "collaboration_panel": {
-    "dock": "left",
+    "dock": "left"
   },
   "git_panel": {
-    "dock": "left",
+    "dock": "left"
   },
   "agent_servers": {
     "pi-acp": {
       "default_config_options": {
         "thought_level": "high"
       },
-      "type": "registry",
-    },
+      "type": "registry"
+    }
   },
   "buffer_line_height": "comfortable",
   "proxy": "",
@@ -75,7 +78,7 @@
     "default_width": 500.0,
     "dock": "right",
     "favorite_models": [],
-    "model_parameters": [],
+    "model_parameters": []
   },
   "ui_font_family": ".ZedSans",
   "cli_default_open_behavior": "new_window",
@@ -83,21 +86,21 @@
   "icon_theme": {
     "mode": "dark",
     "light": "Catppuccin Macchiato",
-    "dark": "Catppuccin Macchiato",
+    "dark": "Catppuccin Macchiato"
   },
   "telemetry": {
     "diagnostics": false,
-    "metrics": false,
+    "metrics": false
   },
   "session": {
-    "trust_all_worktrees": true,
+    "trust_all_worktrees": true
   },
   "terminal": {
     "font_size": 13.0,
     "font_weight": 300.0,
     "shell": "system",
     "font_family": "MonaspiceNe Nerd Font",
-    "font_fallbacks": ["Menlo", "Monaco", "Courier New"],
+    "font_fallbacks": ["Menlo", "Monaco", "Courier New"]
   },
   "project_panel": {
     "entry_spacing": "comfortable",
@@ -108,13 +111,13 @@
     "hide_gitignore": false,
     "default_width": 250.0,
     "dock": "left",
-    "auto_fold_dirs": false,
+    "auto_fold_dirs": false
   },
   "base_keymap": "VSCode",
   "buffer_font_family": "Monaspace Argon",
   "buffer_font_fallbacks": ["Menlo", "Monaco"],
   "file_types": {
-    "env": ["*.env.*", ".env"],
+    "env": ["*.env.*", ".env"]
   },
   "linked_edits": true,
   "tab_size": 2,
@@ -123,6 +126,6 @@
   "theme": {
     "mode": "dark",
     "light": "Catppuccin Latte - No Italics",
-    "dark": "Catppuccin Macchiato - No Italics",
-  },
+    "dark": "Catppuccin Macchiato - No Italics"
+  }
 }
