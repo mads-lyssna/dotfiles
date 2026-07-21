@@ -1,7 +1,10 @@
 worktree-path = "{{ repo_path }}/../{{ repo }}.{{ ((branch | sanitize | split('-'))[:2]) | join('-') }}-{{ branch | hash }}"
 
-[pre-start]
+[[pre-start]]
 mise = "mise trust"
 
-[post-start]
+[[pre-start]]
 copy = "wt step copy-ignored"
+
+[step.copy-ignored]
+exclude = ["node_modules/"]
