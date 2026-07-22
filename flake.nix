@@ -59,10 +59,10 @@
           homeDirectory = "/Users/madeleine.ostoja";
         };
 
-        # Linux devcontainer (vscode user)
-        vscode = mkHome {
+        # Linux devcontainer (lyssna user)
+        lyssna = mkHome {
           system = "aarch64-linux";
-          homeDirectory = "/home/vscode";
+          homeDirectory = "/home/lyssna";
         };
       };
     };
