@@ -116,6 +116,7 @@
     enable = true;
     enableZshIntegration = true;
     settings = {
+      format = "$directory$git_branch$nix_shell$container$cmd_duration$status$line_break$character";
       character = {
         success_symbol = "[❯](peach)";
         error_symbol = "[❯](red)";
