@@ -70,7 +70,6 @@ in
       mise
       pnpm
       devcontainer
-      claude-code
     ];
 
   # Environment
@@ -119,7 +118,7 @@ in
   }
   // lib.optionalAttrs isDarwin {
     ".ssh/config".source = mkLink "configs/ssh";
-    ".config/ghostty/config".source = mkLink "configs/ghostty";
+    ".config/otty/config.toml".source = mkLink "configs/otty/config.toml";
     ".hammerspoon/init.lua".source = mkLink "configs/hammerspoon.lua";
 
     # Claude — managed only on the host; the devcontainer bind-mounts ~/.claude
