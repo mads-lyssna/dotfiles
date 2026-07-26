@@ -145,6 +145,57 @@
     };
   };
 
+  programs.helix = {
+    enable = true;
+    settings = {
+      editor = {
+        line-number = "relative";
+        cursorline = true;
+        bufferline = "multiple";
+        color-modes = true;
+        popup-border = "all";
+        end-of-line-diagnostics = "hint";
+        cursor-shape = {
+          normal = "block";
+          insert = "bar";
+          select = "underline";
+        };
+        indent-guides = {
+          render = true;
+          character = "╎";
+          skip-levels = 1;
+        };
+        inline-diagnostics.cursor-line = "warning";
+      };
+      keys = {
+        normal = {
+          "Cmd-s" = ":write";
+          "Cmd-/" = "toggle_comments";
+          "Cmd-." = "code_action";
+          F2 = "rename_symbol";
+          F12 = "goto_definition";
+          "S-F12" = "goto_reference";
+        };
+        insert = {
+          "Cmd-s" = ":write";
+          "Cmd-/" = "toggle_comments";
+          "Cmd-." = "code_action";
+          F2 = "rename_symbol";
+          F12 = "goto_definition";
+          "S-F12" = "goto_reference";
+        };
+        select = {
+          "Cmd-s" = ":write";
+          "Cmd-/" = "toggle_comments";
+          "Cmd-." = "code_action";
+          F2 = "rename_symbol";
+          F12 = "goto_definition";
+          "S-F12" = "goto_reference";
+        };
+      };
+    };
+  };
+  
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
