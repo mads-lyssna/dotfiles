@@ -10,7 +10,7 @@ cask "linear"
 cask "figma"
 
 # Development
-cask "ghostty"
+cask "otty"
 cask "zed"
 cask "orbstack"
 
