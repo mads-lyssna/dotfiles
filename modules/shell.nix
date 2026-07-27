@@ -128,6 +128,8 @@
       git_branch = {
         style = "bold mauve";
         symbol = " ";
+        truncation_length = 32;
+        truncation_symbol = "…";
       };
       git_commit.tag_symbol = "  ";
       git_status.disabled = true;
