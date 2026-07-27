@@ -100,17 +100,16 @@ in
   home.file = {
     # CLI
     ".config/worktrunk/config.toml".source = mkLink "configs/worktrunk.toml";
+    ".config/otty/config.toml".source = mkLink "configs/otty.toml";
 
     # Pi
-    ".pi/agent/settings.json".source = mkLink "configs/pi/settings.json";
-    ".pi/agent/models.json".source = mkLink "configs/pi/models.json";
-    ".pi/agent/keybindings.json".source = mkLink "configs/pi/keybindings.json";
-    ".pi/agent/themes/theme.json".source = mkLink "configs/pi/theme.json";
-    ".pi/agent/extensions".source = mkLink "configs/pi/extensions";
     ".pi/agent" = {
       source = "${agents}";
       recursive = true;
     };
+    ".pi/agent/settings.json".source = mkLink "configs/pi/settings.json";
+    ".pi/agent/keybindings.json".source = mkLink "configs/pi/keybindings.json";
+    ".pi/agent/pipkin/config.json".source = mkLink "configs/pi/pipkin.json";
 
     # Zed
     ".config/zed/settings.json".source = mkLink "configs/zed/settings.json";

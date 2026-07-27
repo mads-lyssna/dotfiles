@@ -1,0 +1,20 @@
+{
+  "models": {
+    "utility": {
+      "model": "openai-codex/gpt-5.6-luna",
+      "thinking": "minimal"
+    },
+    "low": {
+      "model": "openai-codex/gpt-5.6-luna",
+      "thinking": "medium"
+    },
+    "medium": {
+      "model": "openai-codex/gpt-5.6-terra",
+      "thinking": "high"
+    },
+    "high": {
+      "model": "openai-codex/gpt-5.6-sol",
+      "thinking": "high"
+    }
+  }
+}

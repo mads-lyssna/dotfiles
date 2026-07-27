@@ -15,7 +15,7 @@
   "enableInstallTelemetry": false,
   "theme": "catppuccin-macchiato",
   "packages": [
-    "git:github.com/madeleineostoja/pi-extensions",
-    "npm:pi-smart-fetch"
+    "npm:pi-smart-fetch",
+    "git:github.com/madeleineostoja/pipkin"
   ]
 }
