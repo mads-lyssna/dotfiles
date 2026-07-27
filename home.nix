@@ -100,7 +100,6 @@ in
   home.file = {
     # CLI
     ".config/worktrunk/config.toml".source = mkLink "configs/worktrunk.toml";
-    ".config/otty/config.toml".source = mkLink "configs/otty.toml";
 
     # Pi
     ".pi/agent" = {
@@ -108,6 +107,7 @@ in
       recursive = true;
     };
     ".pi/agent/settings.json".source = mkLink "configs/pi/settings.json";
+    ".pi/agent/models.json".source = mkLink "configs/pi/models.json";
     ".pi/agent/keybindings.json".source = mkLink "configs/pi/keybindings.json";
     ".pi/agent/pipkin/config.json".source = mkLink "configs/pi/pipkin.json";
 
@@ -117,15 +117,7 @@ in
   }
   // lib.optionalAttrs isDarwin {
     ".ssh/config".source = mkLink "configs/ssh";
-    ".config/otty/config.toml".source = mkLink "configs/otty/config.toml";
+    ".config/otty/config.toml".source = mkLink "configs/otty.toml";
     ".hammerspoon/init.lua".source = mkLink "configs/hammerspoon.lua";
-
-    # Claude — managed only on the host; the devcontainer bind-mounts ~/.claude
-    ".claude/settings.json".source = mkLink "configs/claude/settings.json";
-    ".claude/CLAUDE.md".source = "${agents}/AGENTS.md";
-    ".claude/skills" = {
-      source = "${agents}/skills";
-      recursive = true;
-    };
   };
 }
