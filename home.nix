@@ -117,7 +117,7 @@ in
   }
   // lib.optionalAttrs isDarwin {
     ".ssh/config".source = mkLink "configs/ssh";
-    ".config/otty/config.toml".source = mkLink "configs/otty.toml";
+    ".config/otty".source = mkLink "configs/otty";
     ".hammerspoon/init.lua".source = mkLink "configs/hammerspoon.lua";
   };
 }

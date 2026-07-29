@@ -1,1 +1,2 @@
-
+configs/otty/
+!configs/otty/config.toml
