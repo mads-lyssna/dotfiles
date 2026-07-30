@@ -57,9 +57,6 @@ in
       lazygit
       worktrunk
 
-      # Other
-      ctx7
-
       # Work Services
       awscli2
       buildkite-cli
