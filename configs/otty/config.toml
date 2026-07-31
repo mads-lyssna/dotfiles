@@ -13,8 +13,8 @@ session-restore-banner = false
 scrollback-lines = 100000
 session-log-size-mb = 20
 autocomplete-inline-suggestion = false
-autocomplete-shortcut = "ctrl+space"
-autocomplete-show-candidates = "option-escape"
+autocomplete-shortcut = "disable"
+autocomplete-show-candidates = "disable"
 # autocomplete-on-device-learning = true (reset to default)
 # autocomplete-history-ignore = "ssh *" (reset to default)
 
