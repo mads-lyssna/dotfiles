@@ -17,7 +17,7 @@ brew outdated || true
 
 echo
 echo "▶ brew upgrade..."
-brew upgrade || echo "⚠️  some brew upgrades failed (continuing)"
+brew upgrade --yes || echo "⚠️  some brew upgrades failed (continuing)"
 
 echo
 echo "▶ Reconciling Brewfile..."
@@ -32,12 +32,12 @@ brew cleanup --prune=all
 if command -v nix >/dev/null 2>&1; then
   echo
   echo "▶ nix flake update..."
-  (cd "$REPO_DIR" && nix flake update) \
+  nix flake update --flake "$REPO_DIR" \
     || { echo "❌ nix flake update failed"; exit 1; }
 
   echo
   echo "▶ home-manager switch..."
-  (cd "$REPO_DIR" && home-manager switch --flake .) \
+  home-manager switch --flake "$REPO_DIR" \
     || { echo "❌ home-manager switch failed — try 'home-manager switch --rollback'"; exit 1; }
 
   # GC happens via launch agent; not duplicated here
