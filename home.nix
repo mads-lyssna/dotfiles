@@ -55,7 +55,6 @@ in
 
       # Git
       lazygit
-      worktrunk
 
       # Work Services
       awscli2
@@ -71,8 +70,8 @@ in
 
   # Environment
   home.sessionVariables = {
-    EDITOR = "zed --wait";
-    VISUAL = "zed --wait";
+    EDITOR = "hx";
+    VISUAL = "hx";
     COLORTERM = "truecolor";
     PNPM_HOME = pnpmHome;
   };

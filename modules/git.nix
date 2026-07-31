@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 
 {
   programs.gh.enable = true;
@@ -37,6 +37,10 @@
       fetch.prune = true;
       rerere.enabled = true;
     };
+    iniContent.pager = {
+      diff = lib.mkForce "hunk pager";
+      show = lib.mkForce "hunk pager";
+    };
   };
 
   programs.delta = {
@@ -46,6 +50,16 @@
       navigate = true;
       side-by-side = true;
       line-numbers = true;
+    };
+  };
+
+  programs.hunk = {
+    enable = true;
+    settings = {
+      theme = "catppuccin-macchiato";
+      mode = "split";
+      agent_notes = true;
+      vcs.watch = true;
     };
   };
 }
