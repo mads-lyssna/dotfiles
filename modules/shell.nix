@@ -15,6 +15,7 @@
 
   catppuccin = {
     enable = true;
+    autoEnable = true;
     flavor = "macchiato";
     zsh-syntax-highlighting.enable = false;
   };
@@ -82,6 +83,7 @@
       gbclean = "git branch --merged main | grep -v '^[* ]*main$' | xargs -r git branch -d";
 
       # Shortcuts
+      dockerprune = "docker container prune -f && docker volume prune -af && docker network prune -f";
       nixsync = "nix flake update agents --flake ~/dotfiles && home-manager switch --flake ~/dotfiles";
       brewsync = "brew bundle install --cleanup --force --zap --file=~/dotfiles/Brewfile";
       sysupdate = "~/dotfiles/scripts/update.sh";
@@ -92,23 +94,32 @@
       zstyle ':completion:*' menu select
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-      if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+      dockerorphans() {
+        local id name config configs
+        local all_durable_configs_missing has_durable_config
 
-      dockerprune() {
-         docker ps -aq --filter label=com.docker.compose.project.config_files | while read -r id; do
-           missing=$(docker inspect -f '{{ index .Config.Labels "com.docker.compose.project.config_files" }}' "$id" \
-             | tr ',' '\n' \
-             | while read -r cfg; do
-                 [[ -f "$cfg" ]] || { echo "$cfg"; break; }
-               done)
+        docker ps -aq --filter label=com.docker.compose.project.config_files | while read -r id; do
+          configs=$(docker inspect -f '{{ index .Config.Labels "com.docker.compose.project.config_files" }}' "$id")
+          all_durable_configs_missing=true
+          has_durable_config=false
 
-           [[ -z "$missing" ]] || docker rm -f "$id"
-         done
+          while read -r config; do
+            [[ "$config" == */devcontainercli/docker-compose/* ]] && continue
+            has_durable_config=true
+            [[ -e "$config" ]] || continue
+            all_durable_configs_missing=false
+            break
+          done < <(print -r -- "$configs" | tr ',' '\n')
 
-         docker container prune -f
-         docker volume prune -af
-         docker network prune -f
-       }
+          [[ "$has_durable_config" == true && "$all_durable_configs_missing" == true ]] || continue
+
+          name=$(docker inspect -f '{{ .Name }}' "$id")
+          print "Removing orphaned Compose container ''${name#/}"
+          docker rm -f "$id"
+        done
+
+        dockerprune
+      }
     '';
   };
 
@@ -197,7 +208,7 @@
       };
     };
   };
-  
+
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
