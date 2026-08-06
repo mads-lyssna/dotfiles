@@ -112,3 +112,5 @@ selection-foreground = "#cad3f5"
 selection-background = "#5b6078"
 cursor-color = "#f4dbd6"
 cursor-text = "#24273a"
+
+notification-attention = false
