@@ -52,6 +52,7 @@ in
       fd
       fzf
       dust
+      mprocs
 
       # Git
       lazygit
