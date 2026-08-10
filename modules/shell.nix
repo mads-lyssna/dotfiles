@@ -54,6 +54,7 @@
       z = "zed";
       dc = "devcontainer";
       dcu = "devcontainer up && devcontainer exec zsh";
+      piup = "pi update && pi update --extensions";
 
       # Git
       g = "git";
@@ -87,6 +88,7 @@
       nixsync = "nix flake update agents --flake ~/dotfiles && home-manager switch --flake ~/dotfiles";
       brewsync = "brew bundle install --cleanup --force --zap --file=~/dotfiles/Brewfile";
       sysupdate = "~/dotfiles/scripts/update.sh";
+      awsagents = "aws sso login --profile agents --use-device-code";
     };
 
     initContent = ''
