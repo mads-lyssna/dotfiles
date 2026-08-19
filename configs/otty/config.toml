@@ -6,8 +6,8 @@ adjust-cell-height = 0
 theme = "Catppuccin Macchiato"
 theme-dark = "catppuccin-macchiato"
 macos-option-as-alt = "left"
-sidebar-width = 211
-details-panel-width = 282
+sidebar-width = 260
+details-panel-width = 260
 on-launch = "new_window"
 session-restore-banner = false
 scrollback-lines = 100000
@@ -15,29 +15,7 @@ session-log-size-mb = 20
 autocomplete-inline-suggestion = false
 autocomplete-shortcut = "disable"
 autocomplete-show-candidates = "disable"
-# autocomplete-on-device-learning = true (reset to default)
-# autocomplete-history-ignore = "ssh *" (reset to default)
-
-# notification-foreground = "off" (reset to default)
-# privilege-sound-on-error = false (reset to default)
 privilege-sound-shell = false
-privilege-notification-on-error = false
-privilege-notification-on-watch-finish = false
-
-# privilege-badge-exit-status = true (reset to default)
-# privilege-badge-activity = false (reset to default)
-# privilege-badge-agent-processing = true (reset to default)
-# privilege-badge-agent-task-complete = true (reset to default)
-# privilege-badge-agent-awaiting-input = true (reset to default)
-
-# privilege-notify-agent-task-complete = false (reset to default)
-# privilege-notify-agent-awaiting-input = false (reset to default)
-
-# show-auto-approve = false (reset to default)
-# auto-approve-enabled = false (reset to default)
-# ipc-allow-send-keys = false (reset to default)
-# ipc-allow-sensitive-sessions = false (reset to default)
-
 file-open-with = "otty"
 folder-open-with = "otty"
 editor-tab-size = 2
@@ -45,31 +23,12 @@ new-tab-position = "after-current"
 foreground = "#cad3f5"
 background = "#24273a"
 palette-0 = "#494d64"
-
 zoxide-enabled = false
 session-restore-multiplayer = false
-
-
-
 privilege-notification-shell = false
-
-
 clipboard-trim-trailing-spaces = true
-
-
 privilege-caffeinate-agent-processing = true
-
-
-
 auto-theme-dark-mode = false
-
-# cursor-style = "underline" (reset to default)
-
-
-
-# cursor-animation = "smooth" (reset to default)
-
-
 palette-1 = "#ed8796"
 palette-2 = "#a6da95"
 palette-3 = "#eed49f"
@@ -85,12 +44,8 @@ palette-12 = "#78a1f6"
 palette-13 = "#f2a9dd"
 palette-14 = "#63cbc0"
 palette-15 = "#b8c0e0"
-
 cursor-style-blink = "default_on"
-
-
 auto-hide-tabs-panel = "always"
-
 keybind = "cmd+b=toggle_details_panel"
 keybind = "cmd+shift+a=compose_overlay"
 keybind = "cmd+shift+e=details_tab_files"
@@ -101,16 +56,17 @@ keybind = "cmd+shift+r=unbind"
 keybind = "cmd+shift+left_bracket=previous_tab"
 keybind = "cmd+shift+right_bracket=next_tab"
 keybind = "cmd+shift+a=compose_overlay"
-
-
-
-
-
-
-
+keybind = "cmd+shift+o=open_quickly"
 selection-foreground = "#cad3f5"
 selection-background = "#5b6078"
 cursor-color = "#f4dbd6"
 cursor-text = "#24273a"
-
 notification-attention = false
+privilege-notification-on-finish = true
+details-view = 'id="info"'
+details-view = 'id="files"'
+details-view = 'id="outline"'
+details-view = 'id="git"'
+open-with-app = "Zed|dev.zed.Zed"
+tab-rule = 'agent="pi" icon="robot"'
+tab-rule = 'command="lg" icon="git-branch"'
