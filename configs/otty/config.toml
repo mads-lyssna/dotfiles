@@ -1,13 +1,11 @@
 font-family = "MonaspiceNe Nerd Font"
-font-size = 14
+font-size = 15
 font-ligatures = "calt"
 font-blending = "macos-like"
 adjust-cell-height = 0
 theme = "Catppuccin Macchiato"
 theme-dark = "catppuccin-macchiato"
 macos-option-as-alt = "left"
-sidebar-width = 260
-details-panel-width = 260
 on-launch = "new_window"
 session-restore-banner = false
 scrollback-lines = 100000
@@ -70,3 +68,7 @@ details-view = 'id="git"'
 open-with-app = "Zed|dev.zed.Zed"
 tab-rule = 'agent="pi" icon="robot"'
 tab-rule = 'command="lg" icon="git-branch"'
+
+details-panel-width = 260
+
+sidebar-width = 260
