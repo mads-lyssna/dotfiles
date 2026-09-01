@@ -24,5 +24,19 @@
       "~/.local/state/pnpm",
       "~/Library/pnpm/store"
     ]
+  },
+  "mcp": {
+    "linear": {
+      "url": "https://mcp.linear.app/mcp"
+    },
+    "notion": {
+      "url": "https://mcp.notion.com/mcp"
+    },
+    "figma": {
+       "url": "https://mcp.figma.com/mcp",
+       "oauth": {
+         "clientName": "Codex"
+       }
+    }
   }
 }
