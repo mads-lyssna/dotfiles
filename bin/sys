@@ -113,6 +113,11 @@ finish() {
     "✓ $1 complete in ${duration}s"
 }
 
+trust_homebrew_formulae() {
+  step "Trusting configured Homebrew formulae"
+  brew trust --formula datadog-labs/pack/pup
+}
+
 reconcile_apps() {
   step "Reconciling Brewfile"
   brew bundle install --quiet --force-cleanup --force --zap --file="$BREWFILE"
@@ -133,6 +138,7 @@ sync_nix() {
 
 sync_apps() {
   section "Applications"
+  trust_homebrew_formulae
   reconcile_apps
 }
 
@@ -206,6 +212,7 @@ run_update() {
   if is_darwin; then
     section "Applications"
     quiet_step "Updating Homebrew metadata" brew update --quiet
+    trust_homebrew_formulae
     step "Upgrading Homebrew packages"
     brew upgrade --quiet --yes
     reconcile_apps
