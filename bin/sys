@@ -1,0 +1,282 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+REPO_DIR="$HOME/dotfiles"
+BREWFILE="$REPO_DIR/Brewfile"
+
+accent="#c6a0f6"
+muted="#8087a2"
+success="#a6da95"
+warning="#eed49f"
+failure="#ed8796"
+current_step="Starting"
+
+usage() {
+  cat <<'EOF'
+Usage:
+  sys sync [--nix] [--apps]
+  sys update
+  sys cleanup
+  sys help
+
+Commands:
+  sync      Reconcile Nix and applications. Flags select a subset.
+  update    Upgrade and reconcile the complete system.
+  cleanup   Reclaim disk space from package stores and caches.
+
+Sync filters:
+  --nix     Update the agents input and apply Home Manager.
+  --apps    Reconcile Homebrew applications.
+
+With no filters, `sys sync` runs Nix everywhere and applications on macOS.
+EOF
+}
+
+usage_error() {
+  printf 'Error: %s\n\n' "$1" >&2
+  usage >&2
+  exit 2
+}
+
+on_error() {
+  status=$?
+  trap - ERR
+  printf '\n'
+  gum style \
+    --bold \
+    --foreground "$failure" \
+    --border rounded \
+    --border-foreground "$failure" \
+    --padding "0 2" \
+    "✗ System operation failed" \
+    "$current_step"
+  exit "$status"
+}
+
+trap on_error ERR
+
+require_repo() {
+  [[ -d "$REPO_DIR/.git" ]] || usage_error "expected dotfiles repository at $REPO_DIR"
+}
+
+is_darwin() {
+  [[ "$(uname -s)" == "Darwin" ]]
+}
+
+banner() {
+  gum style \
+    --bold \
+    --foreground "$accent" \
+    --border rounded \
+    --border-foreground "$accent" \
+    --padding "0 2" \
+    "$1" \
+    "$(date '+%A, %d %B %Y at %H:%M')"
+}
+
+section() {
+  printf '\n'
+  gum style --bold --foreground "$accent" "$1"
+}
+
+step() {
+  current_step="$1"
+  gum style --foreground "$muted" "  → $current_step"
+}
+
+quiet_step() {
+  current_step="$1"
+  shift
+
+  if ! gum spin \
+    --spinner dot \
+    --spinner.foreground "$accent" \
+    --title "$current_step" \
+    --title.foreground "$muted" \
+    --show-error \
+    -- "$@"; then
+    return 1
+  fi
+
+  gum style --foreground "$muted" "  → $current_step"
+}
+
+finish() {
+  duration=$(($(date +%s) - start_time))
+  printf '\n'
+  gum style \
+    --bold \
+    --foreground "$success" \
+    --border rounded \
+    --border-foreground "$success" \
+    --padding "0 2" \
+    "✓ $1 complete in ${duration}s"
+}
+
+reconcile_apps() {
+  step "Reconciling Brewfile"
+  brew bundle install --quiet --force-cleanup --force --zap --file="$BREWFILE"
+}
+
+apply_home_manager() {
+  quiet_step "Applying Home Manager" home-manager switch --flake "path:$REPO_DIR"
+}
+
+sync_nix() {
+  quiet_step "Updating agents input" nix flake update agents --flake "$REPO_DIR"
+  apply_home_manager
+  (
+    cd "$HOME"
+    quiet_step "Installing configured mise tools" mise install
+  )
+}
+
+sync_apps() {
+  section "Applications"
+  reconcile_apps
+}
+
+run_sync() {
+  include_nix=false
+  include_apps=false
+
+  if (($# == 0)); then
+    include_nix=true
+    if is_darwin; then
+      include_apps=true
+    fi
+  fi
+
+  while (($# > 0)); do
+    case "$1" in
+      --nix)
+        include_nix=true
+        ;;
+      --apps)
+        include_apps=true
+        ;;
+      -h|--help)
+        usage
+        return
+        ;;
+      *)
+        usage_error "unknown sync option: $1"
+        ;;
+    esac
+    shift
+  done
+
+  if [[ "$include_apps" == true ]] && ! is_darwin; then
+    usage_error "application sync is only available on macOS"
+  fi
+
+  require_repo
+  start_time=$(date +%s)
+  banner "System sync"
+
+  if [[ "$include_apps" == true ]]; then
+    sync_apps
+  fi
+
+  if [[ "$include_nix" == true ]]; then
+    section "Nix"
+    sync_nix
+  fi
+
+  finish "System sync"
+}
+
+run_update() {
+  if (($# > 0)); then
+    case "$1" in
+      -h|--help)
+        usage
+        return
+        ;;
+      *)
+        usage_error "update does not accept options"
+        ;;
+    esac
+  fi
+
+  require_repo
+  start_time=$(date +%s)
+  banner "System update"
+
+  if is_darwin; then
+    section "Applications"
+    quiet_step "Updating Homebrew metadata" brew update --quiet
+    step "Upgrading Homebrew packages"
+    brew upgrade --quiet --yes
+    reconcile_apps
+  fi
+
+  section "Nix"
+  quiet_step "Updating flake inputs" nix flake update --flake "$REPO_DIR"
+  apply_home_manager
+
+  section "Toolchains"
+  (
+    cd "$HOME"
+    quiet_step "Installing configured mise tools" mise install
+  )
+  (
+    cd "$HOME"
+    quiet_step "Upgrading mise tools" mise upgrade
+  )
+
+  finish "System update"
+  printf '\n'
+  gum style --foreground "$muted" "  Roll back with: home-manager switch --rollback"
+}
+
+run_cleanup() {
+  if (($# > 0)); then
+    case "$1" in
+      -h|--help)
+        usage
+        return
+        ;;
+      *)
+        usage_error "cleanup does not accept options"
+        ;;
+    esac
+  fi
+
+  require_repo
+  start_time=$(date +%s)
+  banner "System cleanup"
+
+  if is_darwin; then
+    section "Applications"
+    quiet_step "Cleaning Homebrew artifacts" brew cleanup --quiet --prune=all
+  fi
+
+  section "Nix"
+  if ! quiet_step "Optimising the Nix store" nix store optimise; then
+    gum style --foreground "$warning" "  ! Nix store optimisation failed; continuing" >&2
+  fi
+
+  finish "System cleanup"
+}
+
+case "${1:-}" in
+  sync)
+    shift
+    run_sync "$@"
+    ;;
+  update)
+    shift
+    run_update "$@"
+    ;;
+  cleanup)
+    shift
+    run_cleanup "$@"
+    ;;
+  help|-h|--help|"")
+    usage
+    ;;
+  *)
+    usage_error "unknown command: $1"
+    ;;
+esac

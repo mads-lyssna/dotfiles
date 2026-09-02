@@ -2,6 +2,7 @@ local hyper = { "cmd", "ctrl", "alt", "shift" }
 
 local apps = {
   t = "io.appmakes.otty",
+  a = "com.openai.codex",
   x = "dev.zed.Zed",
   b = "net.imput.helium",
   w = "net.imput.helium",

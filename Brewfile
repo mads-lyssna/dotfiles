@@ -7,6 +7,7 @@ cask "helium-browser"
 cask "notion"
 cask "linear"
 cask "figma"
+cask "chatgpt"
 
 # Development
 cask "otty"

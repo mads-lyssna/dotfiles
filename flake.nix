@@ -23,10 +23,6 @@
       url = "github:catppuccin/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    catppuccin-godot = {
-      url = "github:catppuccin/godot";
-      flake = false;
-    };
   };
 
   outputs =
@@ -37,7 +33,6 @@
       worktrunk,
       agents,
       catppuccin,
-      catppuccin-godot,
       ...
     }:
     let
@@ -55,15 +50,16 @@
             worktrunk.homeModules.default
           ];
           extraSpecialArgs = {
-            inherit
-              homeDirectory
-              agents
-              catppuccin-godot
-              ;
+            inherit homeDirectory agents;
           };
         };
     in
     {
+      apps.aarch64-darwin.home-manager = {
+        type = "app";
+        program = "${home-manager.packages.aarch64-darwin.default}/bin/home-manager";
+      };
+
       homeConfigurations = {
         # Mac
         "madeleine.ostoja" = mkHome {

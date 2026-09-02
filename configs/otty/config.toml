@@ -6,6 +6,7 @@ adjust-cell-height = 0
 theme = "Catppuccin Macchiato"
 theme-dark = "catppuccin-macchiato"
 macos-option-as-alt = "left"
+shift-arrow-select = false
 on-launch = "new_window"
 session-restore-banner = false
 scrollback-lines = 100000

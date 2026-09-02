@@ -1,151 +1,96 @@
 # Dotfiles
 
-My personal workstation configuration, running on a Macbook Pro
+Workstation configuration for `madeleine.ostoja`, primarily targeting an Apple Silicon Mac with a smaller Home Manager profile for Linux devcontainers.
 
 ## Stack
 
-- **Nix + home-manager** — packages, shell, shell-integrated tools
-- **Homebrew** — GUI casks and fonts (`Brewfile`)
-- **mise** — per-project language runtimes
-
-## Repo layout
-
-```
-dotfiles/
-├── flake.nix                        # Nix inputs and outputs
-├── flake.lock                       # Pinned versions
-├── home.nix                         # home-manager config
-├── Brewfile                         # GUI casks and fonts
-├── modules/shell.nix                # Shell + integrated tools
-├── config/*                         # Standalone dotfiles
-├── launchd/com.user.nix-gc.plist    # Launch agent for GC
-├── scripts
-  ├── defaults.sh                    # macOS defaults
-  ├── update.sh                      # Manual update script
-  ├── nix-gc.sh                      # Background garbage collection for nix
-```
+- **Nix + Home Manager** — CLI tools, shell configuration, managed links, and user services
+- **Homebrew** — GUI applications, fonts, and platform-specific CLIs
+- **mise** — language runtimes and global ecosystem CLIs
+- **Worktrunk** — worktree creation and personal worktree hooks
 
 ## First-time setup
 
+Install the Xcode Command Line Tools, wait for installation to finish, then clone over HTTPS and run the bootstrap:
+
 ```bash
-# 1. Xcode CLT
 xcode-select --install
-
-# 2. SSH key
-ssh-keygen -t ed25519 -C "your-personal-email@example.com" -f ~/.ssh/id_ed25519
-# Add ~/.ssh/id_ed25519.pub to GitHub: Settings → SSH and GPG keys
-
-# 3. Homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# 4. Nix
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-
-# 5. Dotfiles
-git clone https://github.com/mads-lyssna/dotfiles.git
-chflags hidden dotfiles
-
-# 6. Bootstrap`
+/usr/bin/git clone https://github.com/mads-lyssna/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-nix run home-manager/master -- switch --flake .
-brew bundle install --file=./Brewfile
-./scripts/defaults.sh
-launchctl load ~/dotfiles/launchd/com.user.nix-gc.plist
+./scripts/bootstrap.sh
 ```
 
-## Manual GUI setup
+`bootstrap.sh` requires macOS on Apple Silicon, user `madeleine.ostoja`, `/Users/madeleine.ostoja`, a completed CLT installation, and this repository at `~/dotfiles`. It installs Homebrew and Determinate Nix when absent, creates a local lockfile from current inputs, applies Home Manager, reconciles the Brewfile, installs mise tools, applies macOS defaults, enables the repository hook, and starts GitHub HTTPS authentication.
 
-After bootstrap, complete these once.
+Home Manager conflicts are saved with a timestamped `home-manager-backup-*` suffix. Homebrew environment setup is managed in the Home Manager Zsh profile, so bootstrap does not modify `~/.zprofile`.
 
-### Hyperkey
+## Complete after bootstrap
 
-- Grant accessibility permissions
-- Enable "Caps Lock as Hyper"
+- **1Password** — enable its SSH agent; Home Manager configures SSH to use `~/.1password/agent.sock`.
+- **Hyperkey** — grant Accessibility permission and enable “Caps Lock as Hyper”.
+- **Hammerspoon** — grant Accessibility permission and enable Launch at Login.
+- **Rectangle** — grant Accessibility permission and enable Launch at Login.
+- **BetterDisplay** — grant the requested permissions and enable Launch at Login as needed.
+- **Pearcleaner** — enable Sentinel for occasional orphan cleanup.
+- **Time Machine** — add a backup disk and exclude `~/Code`, `~/.cache`, `/nix`, `/nix/store`, and `~/Library/Caches`.
 
-### Keyboard shortcuts
+Create three Spaces in Mission Control, then configure these shortcuts in System Settings → Keyboard → Keyboard Shortcuts:
 
-Open Hammerspoon, grant accessibility permissions, and enable "Launch at Login" in the menu bar icon. Binds in `configs/hammerspoon.lua` will load automatically.
-
-System Settings → Keyboard → Keyboard Shortcuts:
-
-| Action                | Binding   | Section         |
-| --------------------- | --------- | --------------- |
+| Action | Binding | Section |
+| --- | --- | --- |
 | Switch to Desktop 1–3 | Hyper+1–3 | Mission Control |
 
-Create the three Spaces first via Mission Control (3-finger swipe up, click +).
-
-### Other apps
-
-- **Rectangle** — accessibility permissions, launch on login
-- **MonitorControl** — accessibility permissions, launch on login
-- **Time Machine** — add backup disk, exclude `~/Code`, `~/.cache`, `/nix`, `/nix/store`, `~/Library/Caches`
+Pi asks before trusting projects and Zed does not trust all worktrees. Before using Worktrunk, open `~/Code` as the parent directory in each application and trust it once; worktrees below it then share that trust boundary.
 
 ## Maintenance
 
-### Continuous (automatic)
+### Weekly
 
-MacOS security patches, browsers, Zed, casks with built-in updaters all self-update.
+Home Manager expires generations older than 30 days and garbage-collects unreachable user-store paths weekly.
 
-### Weekly (automatic via launch agent)
-
-`scripts/nix-gc.sh` runs via launchd, throttled to roughly weekly. Logs to `/tmp/nix-gc.log`.
-
-### Quarterly (manual)
+### Quarterly
 
 ```bash
-sysupdate
+sys update
 ```
 
-Runs `scripts/update.sh`: brew update/upgrade, Brewfile reconcile with `--zap`, `nix flake update`, `home-manager switch`, mise plugin update.
+This updates and reconciles Homebrew applications on macOS, updates all Nix inputs, applies Home Manager, and installs and upgrades configured mise tools.
 
-After:
+`flake.lock` is local and ignored. Bootstrap creates it with current inputs, ordinary rebuilds retain those local pins, and `sys update` advances them without creating repository changes.
+
+### On demand
 
 ```bash
-cd ~/dotfiles
-git diff flake.lock
-git commit -am "chore: quarterly update"
-git push
+sys cleanup
 ```
 
-If broken: `nixsync --rollback`.
+This removes stale Homebrew artifacts on macOS and then optimises the Nix store.
 
-### Occasional
+### Command boundaries
 
-- **Pearcleaner** — orphan-files scan after removing apps
-- **DaisyDisk** — investigating disk-full situations
+- `sys sync` updates Nix everywhere and also reconciles applications on macOS.
+- `sys sync --apps` reconciles only the Brewfile and is available on macOS.
+- `sys sync --nix` updates the `agents` input, applies Home Manager, and installs configured mise tools.
+- `sys update` performs the complete quarterly update.
+- `sys cleanup` reclaims disk space without updating dependencies.
+
+The legacy `brewsync`, `nixsync`, and `sysupdate` aliases map to the corresponding `sys` commands.
+
+To roll back Home Manager without updating inputs:
+
+```bash
+home-manager switch --rollback
+```
 
 ## Common operations
 
-**Add a CLI tool (no shell integration):**
-Edit `home.nix` → `home.packages`. Run `nixsync`.
+**Add a native CLI tool:** add it to `home.packages` in `home.nix`, or use its Home Manager module in the relevant file under `modules/`, then run `sys sync --nix`.
 
-**Add a CLI tool (with shell integration):**
-Edit `modules/shell.nix` → add `programs.<tool>` block with `enableZshIntegration = true`. Run `nixsync`.
+**Add a global runtime or ecosystem CLI:** edit `programs.mise.globalConfig` in `modules/mise.nix`, then run `sys sync --nix`.
 
-**Add a GUI app:**
-Edit `Brewfile` → `cask "name"`. Run `brew bundle install`.
+**Add a GUI application:** add a cask to `Brewfile`, then run `sys sync --apps`.
 
-**Add a config file:**
-Create file at `configs/<tool>` in repo. Add to `home.nix`:
-
-```nix
-"{config path}".source = mkLink "configs/<tool>";
-```
-
-Run `nixsync`.
-
-**Edit existing config:**
-
-- Non-shell (gitconfig, ghostty, ssh, claude): edit in repo, immediately live.
-- Shell (zsh, starship, mise, fzf): edit `modules/shell.nix`, run `nixsync`.
-
-**Roll back:**
-
-```bash
-nixsync --rollback
-```
+**Add a configuration file:** create it under `configs/`, add an out-of-store link in `home.nix`, then run `sys sync --nix`. Changes to linked files are live immediately, but Home Manager rollback cannot undo those edits.
 
 **Try a tool ephemerally:**
 
@@ -153,65 +98,33 @@ nixsync --rollback
 nix shell nixpkgs#whatever
 ```
 
-**Inspect generated shell config:**
-
-```bash
-cat ~/.zshrc
-cat ~/.zshenv
-```
-
-**Per-project runtime versions:**
-
-```bash
-cd /path/to/project
-mise use node@20
-```
-
-**Manual GC (bypass throttle):**
-
-```bash
-rm -f ~/.local/state/nix-gc-last-run
-~/Code/dotfiles/nix-gc.sh
-```
-
-**Disable launch agent:**
-
-```bash
-launchctl unload ~/Code/dotfiles/launchd/com.user.nix-gc.plist
-```
-
-## Runbooks
-
-### Disable Time Machine drive auto-mount on work
-
-```bash
-# 1. Plug drive in once on work laptop
-diskutil info "TimeMachineDriveName"   # find Volume UUID
-
-# 2. Edit /etc/fstab
-sudo vifs
-
-# 3. Add line:
-UUID=YOUR-UUID-HERE none apfs rw,noauto # Time Machine
-
-# 4. Save (Esc, :wq, Enter)
-```
-
-To reverse: edit `/etc/fstab`, remove the line.
-
-### Removing an app properly
-
-```bash
-# 1. Edit Brewfile, remove cask line, commit
-# 2. Reconcile (uninstalls + zaps cask-defined associated files)
-brew bundle install --cleanup --force --zap --file=~/dotfiles/Brewfile
-
-# 3. Optional: open Pearcleaner → "Remaining Files" for orphans
-```
-
-### Inspecting what changed in a recent home-manager sync
+**Inspect Home Manager changes:**
 
 ```bash
 home-manager generations
 nix profile diff-closures --profile ~/.local/state/nix/profiles/home-manager
+```
+
+## Ownership boundaries
+
+Native workstation tools such as `bat`, `ripgrep`, `fd`, and `fzf` belong in Nix. Node, pnpm, Python, Ruby, and personal npm CLIs belong in mise. Repository build, test, and runtime tooling belongs in that repository.
+
+Databases, queues, and other stateful development services are not host installs. Repositories own them through platform simulators, disposable remote resources, or project-scoped OrbStack containers. Worktrunk creates worktrees and runs personal setup hooks; repositories must still work with a plain `git worktree add`.
+
+## Linting and recovery
+
+The repository hook calls the same checks available manually:
+
+```bash
+./scripts/lint.sh
+```
+
+It checks Nix formatting and evaluation, Bash syntax and ShellCheck, strict JSON, plist validity, and trailing whitespace. Bootstrap configures `core.hooksPath` to `.githooks`.
+
+Useful verification and recovery commands:
+
+```bash
+nix eval --no-write-lock-file "path:$HOME/dotfiles#homeConfigurations.\"madeleine.ostoja\".activationPackage.drvPath"
+brew bundle check --file=~/dotfiles/Brewfile
+home-manager switch --rollback
 ```

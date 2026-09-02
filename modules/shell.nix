@@ -13,12 +13,7 @@
     ];
   };
 
-  catppuccin = {
-    enable = true;
-    autoEnable = true;
-    flavor = "macchiato";
-    zsh-syntax-highlighting.enable = false;
-  };
+  catppuccin.zsh-syntax-highlighting.enable = false;
 
   programs.zsh = {
     enable = true;
@@ -37,6 +32,12 @@
       ignoreSpace = true;
     };
 
+    profileExtra = ''
+      if [[ -x /opt/homebrew/bin/brew ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+      fi
+    '';
+
     shellAliases = {
       # Tool swaps
       cat = "bat --paging=never";
@@ -47,9 +48,9 @@
 
       # Convenience
       c = "clear";
+      fr = "fresh";
       rmf = "rm -rf";
       pn = "pnpm";
-      sb = "supabase";
       cc = "claude";
       z = "zed";
       dc = "devcontainer";
@@ -58,6 +59,7 @@
 
       # Git
       g = "git";
+      lg = "lazygit";
       gs = "git status";
       ga = "git add";
       gaa = "git add --all";
@@ -85,13 +87,17 @@
 
       # Shortcuts
       dockerprune = "docker container prune -f && docker volume prune -af && docker network prune -f";
-      nixsync = "nix flake update agents --flake ~/dotfiles && home-manager switch --flake ~/dotfiles";
-      brewsync = "brew bundle install --cleanup --force --zap --file=~/dotfiles/Brewfile";
-      sysupdate = "~/dotfiles/scripts/update.sh";
+      nixsync = "sys sync --nix";
+      brewsync = "sys sync --apps";
+      sysupdate = "sys update";
       awsagents = "aws sso login --profile agents --use-device-code";
     };
 
     initContent = ''
+      if [[ -r /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
+        source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+      fi
+
       setopt AUTO_CD INTERACTIVE_COMMENTS EXTENDED_GLOB NO_BEEP
       zstyle ':completion:*' menu select
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
@@ -160,69 +166,6 @@
     };
   };
 
-  programs.helix = {
-    enable = true;
-    settings = {
-      editor = {
-        line-number = "relative";
-        cursorline = true;
-        bufferline = "multiple";
-        color-modes = true;
-        popup-border = "all";
-        end-of-line-diagnostics = "hint";
-        cursor-shape = {
-          normal = "block";
-          insert = "bar";
-          select = "underline";
-        };
-        indent-guides = {
-          render = true;
-          character = "╎";
-          skip-levels = 1;
-        };
-        inline-diagnostics.cursor-line = "warning";
-      };
-      keys = {
-        normal = {
-          "Cmd-s" = ":write";
-          "Cmd-/" = "toggle_comments";
-          "Cmd-." = "code_action";
-          "C-a" = "goto_line_start";
-          "C-e" = "goto_line_end";
-          "A-b" = "move_prev_word_start";
-          "A-f" = "move_next_word_start";
-          F2 = "rename_symbol";
-          F12 = "goto_definition";
-          "S-F12" = "goto_reference";
-        };
-        insert = {
-          "Cmd-s" = ":write";
-          "Cmd-/" = "toggle_comments";
-          "Cmd-." = "code_action";
-          "C-a" = "goto_line_start";
-          "C-e" = "goto_line_end";
-          "A-b" = "move_prev_word_start";
-          "A-f" = "move_next_word_start";
-          F2 = "rename_symbol";
-          F12 = "goto_definition";
-          "S-F12" = "goto_reference";
-        };
-        select = {
-          "Cmd-s" = ":write";
-          "Cmd-/" = "toggle_comments";
-          "Cmd-." = "code_action";
-          "C-a" = "goto_line_start";
-          "C-e" = "goto_line_end";
-          "A-b" = "move_prev_word_start";
-          "A-f" = "move_next_word_start";
-          F2 = "rename_symbol";
-          F12 = "goto_definition";
-          "S-F12" = "goto_reference";
-        };
-      };
-    };
-  };
-
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
@@ -238,26 +181,4 @@
     enableZshIntegration = true;
   };
 
-  programs.lazygit = {
-    enable = true;
-    package = null;
-    enableZshIntegration = true;
-  };
-
-  programs.worktrunk = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
-  programs.mise = {
-    enable = true;
-    enableZshIntegration = true;
-    globalConfig = {
-      tools = {
-        node = "latest";
-        python = "latest";
-        ruby = "latest";
-      };
-    };
-  };
 }

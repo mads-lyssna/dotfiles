@@ -11,11 +11,15 @@
   "steeringMode": "all",
   "followUpMode": "all",
   "tuiMode": "fullscreen",
-  "defaultProjectTrust": "always",
+  "defaultProjectTrust": "ask",
   "fullscreenScrollbar": "auto",
   "collapseChangelog": true,
   "quietStartup": true,
   "enableInstallTelemetry": false,
+  "terminal": {
+    "showTerminalProgress": true
+  },
+  "showCacheMissNotices": true,
   "theme": "catppuccin-macchiato",
   "packages": [
     "git:github.com/madeleineostoja/pipkin",

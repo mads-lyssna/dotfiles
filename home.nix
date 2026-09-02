@@ -10,15 +10,14 @@
 let
   dotfiles = "${homeDirectory}/dotfiles";
   mkLink = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
-  isDarwin = pkgs.stdenv.isDarwin;
-  pnpmHome =
-    if isDarwin then "${homeDirectory}/Library/pnpm" else "${homeDirectory}/.local/share/pnpm";
-
-  # Global pnpm packages, if a nix package isn't available or updated enough
-  pnpmGlobals = [
-    "sentry"
-    "@earendil-works/pi-coding-agent"
-  ];
+  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+  sysCommand = pkgs.writeShellApplication {
+    name = "sys";
+    runtimeInputs = [ pkgs.gum ];
+    text = ''
+      exec "$HOME/dotfiles/bin/sys" "$@"
+    '';
+  };
 in
 {
   home.username = baseNameOf homeDirectory;
@@ -27,15 +26,27 @@ in
 
   programs.home-manager.enable = true;
 
+  services.home-manager.autoExpire = lib.mkIf isDarwin {
+    enable = true;
+    timestamp = "-30 days";
+    frequency = "weekly";
+    store.cleanup = true;
+  };
+
   catppuccin = {
+    enable = true;
+    autoEnable = true;
     flavor = "macchiato";
     accent = "mauve";
   };
 
   # Modules
   imports = [
+    ./modules/editor.nix
     ./modules/git.nix
+    ./modules/mise.nix
     ./modules/shell.nix
+    ./modules/ssh.nix
   ];
 
   # Packages
@@ -52,6 +63,7 @@ in
       fzf
       dust
       mprocs
+      sysCommand
 
       # Git
       lazygit
@@ -63,34 +75,10 @@ in
     ]
     ++ lib.optionals isDarwin [
       nixfmt
-      mise
-      pnpm_10
       devcontainer
     ];
 
-  # Environment
-  home.sessionVariables = {
-    EDITOR = "hx";
-    VISUAL = "hx";
-    COLORTERM = "truecolor";
-    PNPM_HOME = pnpmHome;
-  };
-
-  # PNPM setup
-  home.sessionPath = [
-    pnpmHome
-  ];
-
-  # Ensure global pnpm packages are installed
-  home.activation.pnpmGlobals = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    export PNPM_HOME="${pnpmHome}"
-    export PATH="${pkgs.nodejs}/bin:${pkgs.pnpm_10}/bin:$PNPM_HOME:$PATH"
-    for pkg in ${lib.escapeShellArgs pnpmGlobals}; do
-      if ! ${pkgs.pnpm_10}/bin/pnpm ls -g --depth=0 2>/dev/null | grep -q "$pkg"; then
-        run ${pkgs.pnpm_10}/bin/pnpm add -g --ignore-scripts "$pkg"
-      fi
-    done
-  '';
+  home.sessionVariables.COLORTERM = "truecolor";
 
   # Config files
   home.file = {
@@ -111,7 +99,6 @@ in
     ".config/zed/keymap.json".source = mkLink "configs/zed/keymap.json";
   }
   // lib.optionalAttrs isDarwin {
-    ".ssh/config".source = mkLink "configs/ssh";
     ".config/otty".source = mkLink "configs/otty";
     ".hammerspoon/init.lua".source = mkLink "configs/hammerspoon.lua";
   };

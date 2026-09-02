@@ -13,6 +13,7 @@
       "*.swp"
       "*.swo"
       "*~"
+      ".pi/implement"
     ];
     settings = {
       user = {
@@ -24,7 +25,7 @@
 
       core = {
         pager = "delta";
-        editor = "hx";
+        editor = "fresh";
       };
 
       merge.conflictstyle = "diff3";
@@ -61,5 +62,16 @@
       agent_notes = true;
       vcs.watch = true;
     };
+  };
+
+  programs.lazygit = {
+    enable = true;
+    package = null;
+    enableZshIntegration = true;
+  };
+
+  programs.worktrunk = {
+    enable = true;
+    enableZshIntegration = true;
   };
 }

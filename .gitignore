@@ -1,2 +1,3 @@
 configs/otty/
 !configs/otty/config.toml
+flake.lock
