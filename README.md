@@ -68,11 +68,25 @@ This removes stale Homebrew artifacts on macOS and then optimises the Nix store.
 
 ### Command boundaries
 
+<<<<<<< HEAD
 - `sys sync` updates Nix everywhere and also reconciles applications on macOS.
 - `sys sync --apps` reconciles only the Brewfile and is available on macOS.
 - `sys sync --nix` updates the `agents` input, applies Home Manager, and installs configured mise tools.
 - `sys update` performs the complete quarterly update.
 - `sys cleanup` reclaims disk space without updating dependencies.
+||||||| parent of d6706fb (fix: sync mise as part of sys sync)
+- `sys sync` reconciles applications, updates the `agents` input in `flake.lock`, and applies the Home Manager configuration.
+- `sys sync --apps` reconciles only the Brewfile's Homebrew and MAS declarations.
+- `sys sync --nix` updates only the `agents` input and applies Home Manager.
+- `sys update` updates every Nix input as part of the complete quarterly updater above.
+- `sys cleanup` reclaims disk space without updating or reconciling dependencies.
+=======
+- `sys sync` reconciles applications, updates the `agents` input in `flake.lock`, and applies the Home Manager configuration.
+- `sys sync --apps` reconciles only the Brewfile's Homebrew and MAS declarations.
+- `sys sync --nix` updates the `agents` input, applies Home Manager, and syncs mise tools.
+- `sys update` updates every Nix input as part of the complete quarterly updater above.
+- `sys cleanup` reclaims disk space without updating or reconciling dependencies.
+>>>>>>> d6706fb (fix: sync mise as part of sys sync)
 
 The legacy `brewsync`, `nixsync`, and `sysupdate` aliases map to the corresponding `sys` commands.
 
