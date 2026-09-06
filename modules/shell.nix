@@ -51,11 +51,10 @@
       fr = "fresh";
       rmf = "rm -rf";
       pn = "pnpm";
-      cc = "claude";
       z = "zed";
       dc = "devcontainer";
       dcu = "devcontainer up && devcontainer exec zsh";
-      piup = "pi update && pi update --extensions";
+      piup = "mise upgrade --minimum-release-age 0 'npm:@earendil-works/pi-coding-agent' && pi update --extensions";
 
       # Git
       g = "git";
@@ -122,7 +121,7 @@
           [[ "$has_durable_config" == true && "$all_durable_configs_missing" == true ]] || continue
 
           name=$(docker inspect -f '{{ .Name }}' "$id")
-          print "Removing orphaned Compose container ''${name#/}"
+          print "Removing orphaned Compose container "$name"
           docker rm -f "$id"
         done
 
