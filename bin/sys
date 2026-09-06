@@ -119,8 +119,7 @@ trust_homebrew_formulae() {
 }
 
 reconcile_apps() {
-  step "Reconciling Brewfile"
-  brew bundle install --quiet --force-cleanup --force --zap --file="$BREWFILE"
+  quiet_step "Reconciling Brewfile" brew bundle install --quiet --force-cleanup --force --zap --file="$BREWFILE"
 }
 
 apply_home_manager() {
