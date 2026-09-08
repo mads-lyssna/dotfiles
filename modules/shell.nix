@@ -121,7 +121,7 @@
           [[ "$has_durable_config" == true && "$all_durable_configs_missing" == true ]] || continue
 
           name=$(docker inspect -f '{{ .Name }}' "$id")
-          print "Removing orphaned Compose container "$name"
+          print "Removing orphaned Compose container ''${name#/}"
           docker rm -f "$id"
         done
 
