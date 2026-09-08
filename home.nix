@@ -72,6 +72,7 @@ in
       awscli2
       buildkite-cli
       heroku
+      terraform
     ]
     ++ lib.optionals isDarwin [
       nixfmt
