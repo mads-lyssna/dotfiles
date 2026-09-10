@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 {
   programs.gh.enable = true;
@@ -70,8 +70,9 @@
     enableZshIntegration = true;
   };
 
-  programs.worktrunk = {
-    enable = true;
-    enableZshIntegration = true;
-  };
+  programs.worktrunk.enable = true;
+
+  programs.zsh.initContent = ''
+    eval "$(${lib.getExe pkgs.worktrunk} config shell init zsh)"
+  '';
 }

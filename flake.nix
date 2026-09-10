@@ -11,10 +11,6 @@
       url = "github:modem-dev/hunk";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    worktrunk = {
-      url = "github:max-sixty/worktrunk";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     agents = {
       url = "github:mads-lyssna/agents";
       flake = false;
@@ -30,7 +26,6 @@
       nixpkgs,
       home-manager,
       hunk,
-      worktrunk,
       agents,
       catppuccin,
       ...
@@ -47,7 +42,6 @@
             ./home.nix
             catppuccin.homeModules.catppuccin
             hunk.homeManagerModules.default
-            worktrunk.homeModules.default
           ];
           extraSpecialArgs = {
             inherit homeDirectory agents;
