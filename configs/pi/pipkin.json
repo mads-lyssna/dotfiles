@@ -20,6 +20,8 @@
   },
   "sandbox": {
     "writable": [
+      "~/.aws/cli/cache",
+      "~/.aws/sso/cache",
       "~/.local/state/gh",
       "~/.local/state/pnpm",
       "~/Library/pnpm/store"
