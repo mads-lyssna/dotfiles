@@ -60,6 +60,7 @@ in
         show_tilde = false;
         nerd_font_icons = true;
         cursor_style = "steady_bar";
+        cursor_jump_animation = false;
         indentation_guide = "all";
         indentation_guide_glyph = "╎";
         completion_popup_auto_show = true;
