@@ -1,19 +1,24 @@
 {
   "mcpServers": {
     "context7": {
-      "url": "https://mcp.context7.com/mcp/oauth"
+      "url": "https://mcp.context7.com/mcp/oauth",
+      "description": "Search current, version-specific documentation and code examples for libraries, frameworks, SDKs, APIs, CLI tools, and cloud services."
     },
     "linear": {
-      "url": "https://mcp.linear.app/mcp"
+      "url": "https://mcp.linear.app/mcp",
+      "description": "Search and manage Linear issues, projects, cycles, labels, comments, and documents for task tracking and implementation context."
     },
     "notion": {
-      "url": "https://mcp.notion.com/mcp"
+      "url": "https://mcp.notion.com/mcp",
+      "description": "Search, read, create, and update Notion pages, databases, and comments for workspace documentation, knowledge, and durable notes."
     },
     "sentry": {
-      "url": "https://mcp.sentry.dev/mcp?skills=inspect,seer"
+      "url": "https://mcp.sentry.dev/mcp?skills=inspect,seer",
+      "description": "Investigate Sentry errors and performance events, inspect issues and stack traces, and run Seer root-cause analysis."
     },
     "figma": {
       "url": "https://mcp.figma.com/mcp",
+      "description": "Inspect and create Figma UI designs, screenshots, components, and design tokens, bridge code and design with Code Connect, and create FigJam diagrams.",
       "oauth": {
         "clientName": "Codex"
       }
