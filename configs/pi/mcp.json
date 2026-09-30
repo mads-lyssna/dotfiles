@@ -13,7 +13,10 @@
       "url": "https://mcp.sentry.dev/mcp?skills=inspect,seer"
     },
     "figma": {
-      "url": "https://mcp.figma.com/mcp"
+      "url": "https://mcp.figma.com/mcp",
+      "oauth": {
+        "clientName": "Codex"
+      }
     }
   }
 }
