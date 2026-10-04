@@ -54,7 +54,6 @@
       z = "zed";
       dc = "devcontainer";
       dcu = "devcontainer up && devcontainer exec zsh";
-      piup = "mise upgrade --minimum-release-age 0 'npm:@earendil-works/pi-coding-agent' && pi update --extensions";
 
       # Git
       g = "git";

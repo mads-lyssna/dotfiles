@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# macOS defaults — run once after first-time setup, rerun anytime to reapply
+# macOS defaults — bootstrap only, never reapplied by sys sync or sys update
 
 osascript -e 'tell application "System Settings" to quit' >/dev/null 2>&1 || true
 
@@ -20,6 +20,7 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightC
 defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
 # Finder
+defaults write NSGlobalDomain AppleShowAllExtensions -bool false
 defaults write com.apple.finder ShowPathbar -bool true
 defaults write com.apple.finder ShowStatusBar -bool true
 defaults write com.apple.finder FXPreferredViewStyle -string "clmv"

@@ -24,6 +24,8 @@ cd ~/dotfiles
 
 Home Manager conflicts are saved with a timestamped `home-manager-backup-*` suffix. Homebrew environment setup is managed in the Home Manager Zsh profile, so bootstrap does not modify `~/.zprofile`.
 
+macOS defaults in `scripts/defaults.sh` are applied only during bootstrap, not by Home Manager or `sys sync`/`sys update`. Later preference changes are left alone unless you explicitly rerun bootstrap or the defaults script.
+
 ## Complete after bootstrap
 
 - **1Password** — enable its SSH agent; Home Manager configures SSH to use `~/.1password/agent.sock`.
@@ -54,9 +56,15 @@ Home Manager expires generations older than 30 days and garbage-collects unreach
 sys update
 ```
 
-This updates and reconciles Homebrew applications on macOS, updates all Nix inputs, applies Home Manager, and installs and upgrades configured mise tools.
+This updates and reconciles Homebrew applications on macOS, updates all Nix inputs, applies Home Manager, and installs and upgrades configured mise tools. Use `sys update --nix` for only Nix and mise, or `sys update --apps` for only Homebrew on macOS.
 
 `flake.lock` is local and ignored. Bootstrap creates it with current inputs, ordinary rebuilds retain those local pins, and `sys update` advances them without creating repository changes.
+
+### Pi
+
+Pi is installed through Home Manager from its official `github:earendil-works/pi/stable` flake. `sys update --nix` advances it with the other Nix inputs and applies Home Manager; `sys sync --nix` retains Pi's current pin. `pi update` cannot update the Nix-managed executable. Run `pi update --extensions` separately to update installed Pi extensions.
+
+To migrate an existing mise installation, run `sys sync --nix`. This applies the Nix package and prunes the old mise/npm installation. Open a new shell afterward. Configuration, credentials, sessions, and extensions in `~/.pi/agent/` are preserved.
 
 ### On demand
 
@@ -68,25 +76,14 @@ This removes stale Homebrew artifacts on macOS and then optimises the Nix store.
 
 ### Command boundaries
 
-<<<<<<< HEAD
-- `sys sync` updates Nix everywhere and also reconciles applications on macOS.
+- `sys sync` reconciles Nix and mise everywhere and also applications on macOS.
 - `sys sync --apps` reconciles only the Brewfile and is available on macOS.
-- `sys sync --nix` updates the `agents` input, applies Home Manager, and installs configured mise tools.
+- `sys sync --nix` updates the `agents` input, applies Home Manager, and installs and prunes mise tools.
 - `sys update` performs the complete quarterly update.
+- `sys update --apps` updates Homebrew, upgrades its packages, and reconciles the Brewfile on macOS.
+- `sys update --nix` updates every Nix input, applies Home Manager, and installs and upgrades mise tools.
+- Both sync and update accept `--nix --apps` together on macOS.
 - `sys cleanup` reclaims disk space without updating dependencies.
-||||||| parent of d6706fb (fix: sync mise as part of sys sync)
-- `sys sync` reconciles applications, updates the `agents` input in `flake.lock`, and applies the Home Manager configuration.
-- `sys sync --apps` reconciles only the Brewfile's Homebrew and MAS declarations.
-- `sys sync --nix` updates only the `agents` input and applies Home Manager.
-- `sys update` updates every Nix input as part of the complete quarterly updater above.
-- `sys cleanup` reclaims disk space without updating or reconciling dependencies.
-=======
-- `sys sync` reconciles applications, updates the `agents` input in `flake.lock`, and applies the Home Manager configuration.
-- `sys sync --apps` reconciles only the Brewfile's Homebrew and MAS declarations.
-- `sys sync --nix` updates the `agents` input, applies Home Manager, and syncs mise tools.
-- `sys update` updates every Nix input as part of the complete quarterly updater above.
-- `sys cleanup` reclaims disk space without updating or reconciling dependencies.
->>>>>>> d6706fb (fix: sync mise as part of sys sync)
 
 The legacy `brewsync`, `nixsync`, and `sysupdate` aliases map to the corresponding `sys` commands.
 
