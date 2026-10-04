@@ -130,7 +130,7 @@ apply_home_manager() {
 sync_nix() {
   quiet_step "Updating agents input" nix flake update agents --flake "path:$REPO_DIR"
   apply_home_manager
-  quiet_step "Syncing mise tools" bash -c "mise install -C \"\$HOME\" && mise prune -C \"\$HOME\""
+  quiet_step "Syncing mise tools" bash -c "mise install -C \"\$HOME\" && mise prune --yes -C \"\$HOME\""
 }
 
 sync_apps() {
