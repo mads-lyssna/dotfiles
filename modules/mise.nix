@@ -3,6 +3,7 @@
     enable = true;
     enableZshIntegration = true;
     globalConfig = {
+      settings.minimum_release_age = "0s";
       tools = {
         node = "26";
         pnpm = "12";
