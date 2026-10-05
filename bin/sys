@@ -222,7 +222,7 @@ run_update() {
     )
     (
       cd "$HOME"
-      quiet_step "Upgrading mise tools" mise upgrade
+      quiet_step "Upgrading mise tools" env MISE_FETCH_REMOTE_VERSIONS_CACHE=0s mise upgrade
     )
   fi
 
