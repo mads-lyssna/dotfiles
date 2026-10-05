@@ -14,22 +14,22 @@ current_step="Starting"
 usage() {
   cat <<'EOF'
 Usage:
-  sys sync [--nix] [--apps]
-  sys update [--nix] [--apps]
+  sys sync [--shell] [--apps]
+  sys update [--shell] [--apps]
   sys cleanup
   sys help
 
 Commands:
-  sync      Reconcile Nix and applications. Flags select a subset.
-  update    Upgrade and reconcile Nix and applications. Flags select a subset.
+  sync      Reconcile shell tools and applications. Flags select a subset.
+  update    Upgrade and reconcile shell tools and applications. Flags select a subset.
   cleanup   Reclaim disk space from package stores and caches.
 
 Filters for sync and update:
-  --nix     Apply Home Manager and sync mise tools; update also upgrades both.
+  --shell   Apply Home Manager and sync mise tools; update also upgrades both.
   --apps    Reconcile Homebrew applications; update also upgrades them.
 
 Sync advances only the agents input; update advances all Nix inputs.
-With no filters, both commands run Nix everywhere and applications on macOS.
+With no filters, both commands manage shell tools everywhere and applications on macOS.
 EOF
 }
 
@@ -127,7 +127,7 @@ apply_home_manager() {
   quiet_step "Applying Home Manager" home-manager switch --flake "path:$REPO_DIR"
 }
 
-sync_nix() {
+sync_shell() {
   quiet_step "Updating agents input" nix flake update agents --flake "path:$REPO_DIR"
   apply_home_manager
   quiet_step "Syncing mise tools" bash -c "mise install -C \"\$HOME\" && mise prune --yes -C \"\$HOME\""
@@ -143,11 +143,11 @@ parse_filters() {
   local command="$1"
   shift
 
-  include_nix=false
+  include_shell=false
   include_apps=false
 
   if (($# == 0)); then
-    include_nix=true
+    include_shell=true
     if is_darwin; then
       include_apps=true
     fi
@@ -155,8 +155,8 @@ parse_filters() {
 
   while (($# > 0)); do
     case "$1" in
-      --nix)
-        include_nix=true
+      --shell)
+        include_shell=true
         ;;
       --apps)
         include_apps=true
@@ -187,9 +187,9 @@ run_sync() {
     sync_apps
   fi
 
-  if [[ "$include_nix" == true ]]; then
-    section "Nix"
-    sync_nix
+  if [[ "$include_shell" == true ]]; then
+    section "Shell tools"
+    sync_shell
   fi
 
   finish "System sync"
@@ -210,7 +210,7 @@ run_update() {
     reconcile_apps
   fi
 
-  if [[ "$include_nix" == true ]]; then
+  if [[ "$include_shell" == true ]]; then
     section "Nix"
     quiet_step "Updating flake inputs" nix flake update --flake "path:$REPO_DIR"
     apply_home_manager
@@ -227,7 +227,7 @@ run_update() {
   fi
 
   finish "System update"
-  if [[ "$include_nix" == true ]]; then
+  if [[ "$include_shell" == true ]]; then
     printf '\n'
     gum style --foreground "$muted" "  Roll back with: home-manager switch --rollback"
   fi

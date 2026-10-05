@@ -8,6 +8,7 @@
         pnpm = "12";
         python = "latest";
         ruby = "latest";
+        "npm:@earendil-works/pi-coding-agent" = "latest";
       };
     };
   };

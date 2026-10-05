@@ -11,10 +11,6 @@
       url = "github:modem-dev/hunk";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    pi = {
-      url = "github:earendil-works/pi/stable";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     agents = {
       url = "github:mads-lyssna/agents";
       flake = false;
@@ -30,7 +26,6 @@
       nixpkgs,
       home-manager,
       hunk,
-      pi,
       agents,
       catppuccin,
       ...
@@ -49,7 +44,7 @@
             hunk.homeManagerModules.default
           ];
           extraSpecialArgs = {
-            inherit homeDirectory agents pi;
+            inherit homeDirectory agents;
           };
         };
     in

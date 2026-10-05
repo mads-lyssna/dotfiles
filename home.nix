@@ -4,7 +4,6 @@
   lib,
   homeDirectory,
   agents,
-  pi,
   ...
 }:
 
@@ -65,7 +64,6 @@ in
       dust
       mprocs
       sysCommand
-      pi.packages.${pkgs.stdenv.hostPlatform.system}.default
 
       # Git
       lazygit

@@ -85,9 +85,6 @@
 
       # Shortcuts
       dockerprune = "docker container prune -f && docker volume prune -af && docker network prune -f";
-      nixsync = "sys sync --nix";
-      brewsync = "sys sync --apps";
-      sysupdate = "sys update";
       awsagents = "aws sso login --profile agents --use-device-code";
     };
 
