@@ -1,6 +1,7 @@
 {
+  "$schema": "https://pi.dev/schemas/keybindings.schema.json",
   "app.model.cycleForward": "shift+tab",
   "app.thinking.cycle": "alt+tab",
-  "app.editor.external": "",
-  "app.session.rename": ""
+  "app.editor.external": [],
+  "app.session.rename": []
 }
