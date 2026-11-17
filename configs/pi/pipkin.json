@@ -6,16 +6,16 @@
       "thinking": "medium"
     },
     "low": {
-      "model": "openai-codex/gpt-6-luna",
-      "thinking": "xhigh"
+      "model": "openai-codex/gpt-6.1-terra",
+      "thinking": "high"
     },
     "medium": {
-      "model": "openai-codex/gpt-6.1-sol",
+      "model": "openai-codex/gpt-6.2-sol",
       "thinking": "high"
     },
     "high": {
-      "model": "openai-codex/gpt-6.1-sol",
-      "thinking": "xhigh"
+      "model": "openai-codex/gpt-6.2-astra",
+      "thinking": "medium"
     }
   },
   "sandbox": {

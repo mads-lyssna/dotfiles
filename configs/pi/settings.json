@@ -1,16 +1,19 @@
 {
   "$schema": "https://pi.dev/schemas/settings.schema.json",
-  "lastChangelogVersion": "0.99.2",
+  "lastChangelogVersion": "1.5.2",
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.6-terra",
+  "defaultModel": "gpt-6.2-sol",
   "defaultThinkingLevel": "high",
-  "defaultTools": ["+codemode", "+tool_search"],
+  "defaultTools": [
+    "+codemode",
+    "+tool_search"
+  ],
   "codemode": {
     "mode": "on"
   },
   "enabledModels": [
-    "openai-codex/gpt-6-astra",
-    "openai-codex/gpt-6.1-sol"
+    "openai-codex/gpt-6.2-sol",
+    "openai-codex/gpt-6.2-astra"
   ],
   "hideThinkingBlock": true,
   "steeringMode": "all",
@@ -32,12 +35,16 @@
     "npm:@narumitw/pi-usage"
   ],
   "modelThinkingLevels": {
-    "openai-codex/gpt-6-astra": "medium",
-    "openai-codex/gpt-6.1-sol": "high",
+    "openai-codex/gpt-6.2-astra": "medium",
+    "openai-codex/gpt-6.2-sol": "high",
     "openai-codex/gpt-6-luna": "xhigh"
   },
   "cacheWarming": "idle",
   "markdown": {
     "mermaid": "streaming"
+  },
+  "deviceId": "fdd11d20-bc63-4359-9043-57c0c7c07462",
+  "extensionChangelogVersions": {
+    "{\"source\":\"npm:@narumitw/pi-usage\",\"scope\":\"user\"}": "0.69.3"
   }
 }

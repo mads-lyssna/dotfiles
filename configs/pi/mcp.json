@@ -1,5 +1,9 @@
 {
   "mcpServers": {
+    "expo": {
+      "url": "https://mcp.expo.dev/mcp",
+      "description": "Search Expo documentation, manage EAS builds and workflows, and interact with local Expo apps through simulator automation and React Native DevTools."
+    },
     "context7": {
       "url": "https://mcp.context7.com/mcp/oauth",
       "description": "Search current, version-specific documentation and code examples for libraries, frameworks, SDKs, APIs, CLI tools, and cloud services."
