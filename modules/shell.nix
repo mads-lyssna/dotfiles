@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 {
   home.sessionVariables = {
@@ -52,8 +52,6 @@
       rmf = "rm -rf";
       pn = "pnpm";
       z = "zed";
-      dc = "devcontainer";
-      dcu = "devcontainer up && devcontainer exec zsh";
 
       # Git
       g = "git";
@@ -84,7 +82,6 @@
       gbclean = "git branch --merged main | grep -v '^[* ]*main$' | xargs -r git branch -d";
 
       # Shortcuts
-      dockerprune = "docker container prune -f && docker volume prune -af && docker network prune -f";
       awsagents = "aws sso login --profile agents --use-device-code";
     };
 
@@ -97,32 +94,7 @@
       zstyle ':completion:*' menu select
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-      dockerorphans() {
-        local id name config configs
-        local all_durable_configs_missing has_durable_config
-
-        docker ps -aq --filter label=com.docker.compose.project.config_files | while read -r id; do
-          configs=$(docker inspect -f '{{ index .Config.Labels "com.docker.compose.project.config_files" }}' "$id")
-          all_durable_configs_missing=true
-          has_durable_config=false
-
-          while read -r config; do
-            [[ "$config" == */devcontainercli/docker-compose/* ]] && continue
-            has_durable_config=true
-            [[ -e "$config" ]] || continue
-            all_durable_configs_missing=false
-            break
-          done < <(print -r -- "$configs" | tr ',' '\n')
-
-          [[ "$has_durable_config" == true && "$all_durable_configs_missing" == true ]] || continue
-
-          name=$(docker inspect -f '{{ .Name }}' "$id")
-          print "Removing orphaned Compose container ''${name#/}"
-          docker rm -f "$id"
-        done
-
-        docker container prune -f && docker volume prune -af && docker network prune -f
-      }
+      eval "$(${lib.getExe pkgs.devenv} hook zsh)"
     '';
   };
 
@@ -130,7 +102,7 @@
     enable = true;
     enableZshIntegration = true;
     settings = {
-      format = "$directory$git_branch$nix_shell$container$cmd_duration$status$line_break$character";
+      format = "$directory$git_branch$nix_shell$cmd_duration$status$line_break$character";
       character = {
         success_symbol = "[❯](peach)";
         error_symbol = "[❯](red)";
@@ -152,8 +124,6 @@
       python.symbol = " ";
       ruby.symbol = " ";
       nix_shell.symbol = " ";
-      docker_context.symbol = " ";
-      container.symbol = " ";
       aws = {
         symbol = "󰸏 ";
         format = "on [$symbol($profile )]($style)";

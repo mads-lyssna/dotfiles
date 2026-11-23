@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  lib,
   homeDirectory,
   agents,
   ...
@@ -10,7 +9,6 @@
 let
   dotfiles = "${homeDirectory}/dotfiles";
   mkLink = path: config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
-  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
   sysCommand = pkgs.writeShellApplication {
     name = "sys";
     runtimeInputs = [ pkgs.gum ];
@@ -26,7 +24,7 @@ in
 
   programs.home-manager.enable = true;
 
-  services.home-manager.autoExpire = lib.mkIf isDarwin {
+  services.home-manager.autoExpire = {
     enable = true;
     timestamp = "-30 days";
     frequency = "weekly";
@@ -50,34 +48,32 @@ in
   ];
 
   # Packages
-  home.packages =
-    with pkgs;
-    [
-      # Shell
-      starship
+  home.packages = with pkgs; [
+    # Shell
+    starship
 
-      # CLI tools
-      bat
-      ripgrep
-      fd
-      fzf
-      dust
-      mprocs
-      sysCommand
+    # CLI tools
+    bat
+    ripgrep
+    fd
+    fzf
+    dust
+    mprocs
+    sysCommand
 
-      # Git
-      lazygit
+    # Development
+    devenv
+    nixfmt
 
-      # Work Services
-      awscli2
-      buildkite-cli
-      heroku
-      terraform
-    ]
-    ++ lib.optionals isDarwin [
-      nixfmt
-      devcontainer
-    ];
+    # Git
+    lazygit
+
+    # Work Services
+    awscli2
+    buildkite-cli
+    heroku
+    terraform
+  ];
 
   home.sessionVariables.COLORTERM = "truecolor";
 
@@ -99,8 +95,8 @@ in
     # Zed
     ".config/zed/settings.json".source = mkLink "configs/zed/settings.json";
     ".config/zed/keymap.json".source = mkLink "configs/zed/keymap.json";
-  }
-  // lib.optionalAttrs isDarwin {
+
+    # macOS apps
     ".config/otty".source = mkLink "configs/otty";
     ".hammerspoon/init.lua".source = mkLink "configs/hammerspoon.lua";
   };

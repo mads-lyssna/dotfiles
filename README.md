@@ -1,6 +1,6 @@
 # Dotfiles
 
-Workstation configuration for `madeleine.ostoja`, primarily targeting an Apple Silicon Mac with a smaller Home Manager profile for Linux devcontainers.
+Apple Silicon Mac workstation configuration for `madeleine.ostoja`.
 
 ## Stack
 
@@ -56,7 +56,7 @@ Home Manager expires generations older than 30 days and garbage-collects unreach
 sys update
 ```
 
-This updates and reconciles Homebrew applications on macOS, updates all Nix inputs, applies Home Manager, and installs and upgrades configured mise tools. Use `sys update --shell` for only Nix and mise, or `sys update --apps` for only Homebrew on macOS.
+This updates and reconciles Homebrew applications, updates all Nix inputs, applies Home Manager, and installs and upgrades configured mise tools. Use `sys update --shell` for only Nix and mise, or `sys update --apps` for only Homebrew.
 
 `flake.lock` is local and ignored. Bootstrap creates it with current inputs, ordinary rebuilds retain those local pins, and `sys update` advances them without creating repository changes.
 
@@ -72,17 +72,17 @@ To migrate an existing Nix installation, run `sys sync --shell`. This removes th
 sys cleanup
 ```
 
-This removes stale Homebrew artifacts on macOS and then optimises the Nix store.
+This removes stale Homebrew artifacts and then optimises the Nix store.
 
 ### Command boundaries
 
-- `sys sync` reconciles Nix and mise everywhere and also applications on macOS.
-- `sys sync --apps` reconciles only the Brewfile and is available on macOS.
+- `sys sync` reconciles Nix, mise, and Homebrew.
+- `sys sync --apps` reconciles only the Brewfile.
 - `sys sync --shell` updates the `agents` input, applies Home Manager, and installs and prunes mise tools.
 - `sys update` performs the complete quarterly update.
-- `sys update --apps` updates Homebrew, upgrades its packages, and reconciles the Brewfile on macOS.
+- `sys update --apps` updates Homebrew, upgrades its packages, and reconciles the Brewfile.
 - `sys update --shell` updates every Nix input, applies Home Manager, and installs and upgrades mise tools.
-- Both sync and update accept `--shell --apps` together on macOS.
+- Both sync and update accept `--shell --apps` together.
 - `sys cleanup` reclaims disk space without updating dependencies.
 
 To roll back Home Manager without updating inputs:
@@ -118,7 +118,7 @@ nix profile diff-closures --profile ~/.local/state/nix/profiles/home-manager
 
 Native workstation tools such as `bat`, `ripgrep`, `fd`, and `fzf` belong in Nix. Node, pnpm, Python, Ruby, and personal npm CLIs belong in mise. Repository build, test, and runtime tooling belongs in that repository.
 
-Databases, queues, and other stateful development services are not host installs. Repositories own them through platform simulators, disposable remote resources, or project-scoped OrbStack containers. Worktrunk creates worktrees and runs personal setup hooks; repositories must still work with a plain `git worktree add`.
+Databases, queues, and other stateful development services are not host installs. Repositories own them through platform simulators, disposable remote resources, or project-scoped local services. Worktrunk creates worktrees and runs personal setup hooks; repositories must still work with a plain `git worktree add`.
 
 ## Linting and recovery
 

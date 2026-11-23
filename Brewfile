@@ -12,7 +12,6 @@ cask "chatgpt"
 # Development
 cask "otty"
 cask "zed"
-cask "orbstack"
 
 # Utilities
 cask "hammerspoon"

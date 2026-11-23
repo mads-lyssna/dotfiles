@@ -1,5 +1,5 @@
 {
-  description = "Cross-platform home-manager configuration";
+  description = "Apple Silicon Home Manager configuration";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -22,7 +22,7 @@
   };
 
   outputs =
-    inputs@{
+    {
       nixpkgs,
       home-manager,
       hunk,
@@ -30,41 +30,25 @@
       catppuccin,
       ...
     }:
-    let
-      mkHome =
-        { system, homeDirectory }:
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-          };
-          modules = [
-            ./home.nix
-            catppuccin.homeModules.catppuccin
-            hunk.homeManagerModules.default
-          ];
-          extraSpecialArgs = {
-            inherit homeDirectory agents;
-          };
-        };
-    in
     {
       apps.aarch64-darwin.home-manager = {
         type = "app";
         program = "${home-manager.packages.aarch64-darwin.default}/bin/home-manager";
       };
 
-      homeConfigurations = {
-        # Mac
-        "madeleine.ostoja" = mkHome {
+      homeConfigurations."madeleine.ostoja" = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
           system = "aarch64-darwin";
-          homeDirectory = "/Users/madeleine.ostoja";
+          config.allowUnfree = true;
         };
-
-        # Linux devcontainer (lyssna user)
-        lyssna = mkHome {
-          system = "aarch64-linux";
-          homeDirectory = "/home/lyssna";
+        modules = [
+          ./home.nix
+          catppuccin.homeModules.catppuccin
+          hunk.homeManagerModules.default
+        ];
+        extraSpecialArgs = {
+          homeDirectory = "/Users/madeleine.ostoja";
+          inherit agents;
         };
       };
     };

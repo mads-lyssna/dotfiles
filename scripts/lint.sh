@@ -5,18 +5,7 @@ REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_DIR"
 
 nix shell "nixpkgs#nixfmt" -c nixfmt --check flake.nix home.nix modules/*.nix
-case "$(uname -s)" in
-  Darwin)
-    nix eval --no-write-lock-file "path:$REPO_DIR#homeConfigurations.\"madeleine.ostoja\".activationPackage.drvPath" >/dev/null
-    ;;
-  Linux)
-    nix eval --no-write-lock-file "path:$REPO_DIR#homeConfigurations.lyssna.activationPackage.drvPath" >/dev/null
-    ;;
-  *)
-    printf 'Error: unsupported lint platform.\n' >&2
-    exit 1
-    ;;
-esac
+nix eval --no-write-lock-file "path:$REPO_DIR#homeConfigurations.\"madeleine.ostoja\".activationPackage.drvPath" >/dev/null
 
 shell_files=()
 while IFS= read -r file; do
