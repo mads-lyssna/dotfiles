@@ -1,6 +1,6 @@
 {
   "$schema": "https://pi.dev/schemas/settings.schema.json",
-  "lastChangelogVersion": "1.5.2",
+  "lastChangelogVersion": "1.6.0",
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6.2-sol",
   "defaultThinkingLevel": "high",
@@ -45,6 +45,6 @@
   },
   "deviceId": "fdd11d20-bc63-4359-9043-57c0c7c07462",
   "extensionChangelogVersions": {
-    "{\"source\":\"npm:@narumitw/pi-usage\",\"scope\":\"user\"}": "0.69.3"
+    "{\"source\":\"npm:@narumitw/pi-usage\",\"scope\":\"user\"}": "0.69.4"
   }
 }

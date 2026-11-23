@@ -94,7 +94,12 @@
       zstyle ':completion:*' menu select
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-      eval "$(${lib.getExe pkgs.devenv} hook zsh)"
+      source ${pkgs.runCommand "devenv-hook.zsh" { } ''
+        ${lib.getExe pkgs.devenv} hook zsh -- --no-tui > "$out"
+        substituteInPlace "$out" --replace-fail '    local previous_exit_status=$?' '    local previous_exit_status=$?
+    [[ ''${_devenv_checked_pwd:-} != "$PWD" ]] || return $previous_exit_status
+    _devenv_checked_pwd=$PWD'
+      ''}
     '';
   };
 

@@ -1,0 +1,8 @@
+version: 1
+tui:
+  theme:
+    preset: terminal
+  statusline:
+    enabled: false
+shell:
+  prompt_prefix: false

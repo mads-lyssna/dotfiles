@@ -22,6 +22,8 @@
     "writable": [
       "~/.aws/cli/cache",
       "~/.aws/sso/cache",
+      "~/.local/share/devenv/gc",
+      "~/.local/share/lyssna",
       "~/.local/state/gh",
       "~/.local/state/pnpm",
       "~/.moon",

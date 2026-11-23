@@ -59,6 +59,7 @@ in
     fzf
     dust
     mprocs
+    _1password-cli
     sysCommand
 
     # Development
@@ -80,6 +81,7 @@ in
   # Config files
   home.file = {
     # CLI
+    ".config/devenv/config.yaml".source = mkLink "configs/devenv/config.yaml";
     ".config/worktrunk/config.toml".source = mkLink "configs/worktrunk.toml";
 
     # Pi
