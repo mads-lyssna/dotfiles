@@ -28,6 +28,7 @@
       "~/.local/state/pnpm",
       "~/.moon",
       "~/.proto",
+      "~/Library/Application Support/vitest",
       "~/Library/pnpm/store"
     ]
   }
